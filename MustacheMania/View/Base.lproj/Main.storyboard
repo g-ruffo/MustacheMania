@@ -43,7 +43,7 @@
                         <viewLayoutGuide key="safeArea" id="mAe-7U-Wdm"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Hgd-f7-Dvp"/>
+                    <navigationItem key="navigationItem" title="Saved Videos" largeTitleDisplayMode="always" id="Hgd-f7-Dvp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIR-Jj-p7a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -59,7 +59,7 @@
                         <viewLayoutGuide key="safeArea" id="vqf-oG-b79"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VXt-9d-Fge"/>
+                    <navigationItem key="navigationItem" title="Create Video" largeTitleDisplayMode="always" id="VXt-9d-Fge"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rc9-UE-37C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -68,7 +68,7 @@
         <!--Create-->
         <scene sceneID="oRC-RR-kQ7">
             <objects>
-                <navigationController storyboardIdentifier="RecordVideoNavigation" automaticallyAdjustsScrollViewInsets="NO" id="7zf-3M-7XM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RecordVideoNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7zf-3M-7XM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Create" image="video" catalog="system" id="Dh9-ZO-IyV">
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="0.0" maxX="100" maxY="0.0"/>
                         <color key="badgeColor" systemColor="systemRedColor"/>
@@ -91,7 +91,7 @@
         <!--Videos-->
         <scene sceneID="0No-0I-h3k">
             <objects>
-                <navigationController storyboardIdentifier="VideoListNavigation" automaticallyAdjustsScrollViewInsets="NO" id="c2x-q0-xTr" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="VideoListNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="c2x-q0-xTr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Videos" image="list.bullet.circle" catalog="system" id="Dqc-nl-HYt">
                         <color key="badgeColor" systemColor="linkColor"/>
                         <imageReference key="selectedImage" image="list.bullet.circle.fill" catalog="system" symbolScale="large"/>
