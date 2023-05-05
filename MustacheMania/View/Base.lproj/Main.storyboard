@@ -18,15 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="systemBlueColor"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="jr6-3i-yCd" kind="relationship" relationship="viewControllers" id="bJg-R0-3Rq"/>
-                        <segue destination="GTv-lW-ZzW" kind="relationship" relationship="viewControllers" id="WhS-J7-dFf"/>
-                    </connections>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="tabBarHeight">
+                            <real key="value" value="64"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="tabBarCornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5be-9J-L5Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="253" y="-227"/>
+            <point key="canvasLocation" x="807" y="-616"/>
         </scene>
         <!--Video List Controller-->
         <scene sceneID="N1b-Nw-4Ac">
@@ -38,14 +43,11 @@
                         <viewLayoutGuide key="safeArea" id="mAe-7U-Wdm"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Videos" image="list.bullet.circle" catalog="system" id="Dqc-nl-HYt">
-                        <color key="badgeColor" systemColor="linkColor"/>
-                        <imageReference key="selectedImage" image="list.bullet.circle.fill" catalog="system" symbolScale="large"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="Hgd-f7-Dvp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIR-Jj-p7a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-291" y="512"/>
+            <point key="canvasLocation" x="405" y="927"/>
         </scene>
         <!--Record Video Controller-->
         <scene sceneID="SAf-ay-D2X">
@@ -57,14 +59,56 @@
                         <viewLayoutGuide key="safeArea" id="vqf-oG-b79"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Record" image="video" catalog="system" id="Dh9-ZO-IyV">
-                        <color key="badgeColor" systemColor="systemRedColor"/>
-                        <imageReference key="selectedImage" image="video.fill" catalog="system" symbolScale="large"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="VXt-9d-Fge"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rc9-UE-37C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="808" y="512"/>
+            <point key="canvasLocation" x="1166" y="927"/>
+        </scene>
+        <!--Create-->
+        <scene sceneID="oRC-RR-kQ7">
+            <objects>
+                <navigationController storyboardIdentifier="RecordVideoNavigation" automaticallyAdjustsScrollViewInsets="NO" id="7zf-3M-7XM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Create" image="video" catalog="system" id="Dh9-ZO-IyV">
+                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="0.0" maxX="100" maxY="0.0"/>
+                        <color key="badgeColor" systemColor="systemRedColor"/>
+                        <imageReference key="selectedImage" image="video.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MBi-qc-Dit">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GTv-lW-ZzW" kind="relationship" relationship="rootViewController" id="O40-HO-Vft"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eg9-bZ-rb5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1166" y="185"/>
+        </scene>
+        <!--Videos-->
+        <scene sceneID="0No-0I-h3k">
+            <objects>
+                <navigationController storyboardIdentifier="VideoListNavigation" automaticallyAdjustsScrollViewInsets="NO" id="c2x-q0-xTr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Videos" image="list.bullet.circle" catalog="system" id="Dqc-nl-HYt">
+                        <color key="badgeColor" systemColor="linkColor"/>
+                        <imageReference key="selectedImage" image="list.bullet.circle.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YWS-0x-Fv0">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jr6-3i-yCd" kind="relationship" relationship="rootViewController" id="4bD-0L-nrt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aY6-qo-0eS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="404" y="185"/>
         </scene>
     </scenes>
     <resources>
@@ -73,6 +117,9 @@
         <image name="video" catalog="system" width="128" height="82"/>
         <image name="video.fill" catalog="system" width="128" height="81"/>
         <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">

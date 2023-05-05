@@ -10,6 +10,7 @@ import Foundation
 struct K {
     
     struct Navigation {
-        static let recordingsNav = "RecordingNavigation"
+        static let recordVideoNav = "RecordVideoNavigation"
+        static let videoListNav = "VideoListNavigation"
     }
 }
