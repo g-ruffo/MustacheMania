@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="gTV-IL-0wX" customClass="VideoCell" customModule="MustacheMania" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="228" height="228"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="228" height="228"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionmark.video.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="EWE-yi-Gm5">
+                        <rect key="frame" x="0.0" y="2.3333333333333286" width="228" height="223.33333333333337"/>
+                        <color key="tintColor" systemColor="systemGrayColor"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wv6-Ni-mji">
+                        <rect key="frame" x="132" y="184" width="78" height="31"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:15:34" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3B-eg-fru">
+                                <rect key="frame" x="5" y="5" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="e3B-eg-fru" firstAttribute="top" secondItem="Wv6-Ni-mji" secondAttribute="top" constant="5" id="2qH-9V-luv"/>
+                            <constraint firstItem="e3B-eg-fru" firstAttribute="leading" secondItem="Wv6-Ni-mji" secondAttribute="leading" constant="5" id="LhY-ox-UTF"/>
+                            <constraint firstAttribute="bottom" secondItem="e3B-eg-fru" secondAttribute="bottom" constant="5" id="o53-Ng-Hi1"/>
+                            <constraint firstAttribute="trailing" secondItem="e3B-eg-fru" secondAttribute="trailing" constant="5" id="rlW-8j-hbO"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big Beard" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Q-0z-8dM">
+                        <rect key="frame" x="68.666666666666657" y="16.666666666666668" width="90.666666666666657" height="24.000000000000004"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Wv6-Ni-mji" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.75" id="62N-Ug-VGT"/>
+                <constraint firstAttribute="trailing" secondItem="EWE-yi-Gm5" secondAttribute="trailing" id="7im-Eg-cyc"/>
+                <constraint firstItem="z5Q-0z-8dM" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ClQ-EG-dw0"/>
+                <constraint firstItem="EWE-yi-Gm5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XiZ-1y-2Ds"/>
+                <constraint firstItem="EWE-yi-Gm5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bQo-Ce-bp1"/>
+                <constraint firstAttribute="bottom" secondItem="EWE-yi-Gm5" secondAttribute="bottom" id="gQh-47-bcU"/>
+                <constraint firstItem="z5Q-0z-8dM" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.25" id="nnK-ui-rRW"/>
+                <constraint firstItem="Wv6-Ni-mji" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" multiplier="1.5" id="roa-Qe-Deb"/>
+            </constraints>
+            <size key="customSize" width="228" height="207"/>
+            <connections>
+                <outlet property="durationLabel" destination="e3B-eg-fru" id="WlM-cM-B6o"/>
+                <outlet property="durationViewContainer" destination="Wv6-Ni-mji" id="fw3-tp-BPc"/>
+                <outlet property="tagLabel" destination="z5Q-0z-8dM" id="ADn-gc-S8C"/>
+                <outlet property="videoPreviewImage" destination="EWE-yi-Gm5" id="0no-El-nrs"/>
+            </connections>
+            <point key="canvasLocation" x="204.58015267175571" y="42.605633802816904"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="questionmark.video.fill" catalog="system" width="128" height="81"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

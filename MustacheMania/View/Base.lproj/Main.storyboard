@@ -40,10 +40,31 @@
                     <view key="view" contentMode="scaleToFill" id="RjI-qM-dBU">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="moZ-Qb-aaE">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GJo-xE-BV8">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="mAe-7U-Wdm"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <constraints>
+                            <constraint firstItem="moZ-Qb-aaE" firstAttribute="top" secondItem="mAe-7U-Wdm" secondAttribute="top" id="Cc2-6w-UE7"/>
+                            <constraint firstItem="moZ-Qb-aaE" firstAttribute="leading" secondItem="mAe-7U-Wdm" secondAttribute="leading" id="KfD-wj-MgK"/>
+                            <constraint firstItem="mAe-7U-Wdm" firstAttribute="trailing" secondItem="moZ-Qb-aaE" secondAttribute="trailing" id="Vnh-4A-ciE"/>
+                            <constraint firstItem="mAe-7U-Wdm" firstAttribute="bottom" secondItem="moZ-Qb-aaE" secondAttribute="bottom" id="o0V-Q9-mTA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Saved Videos" largeTitleDisplayMode="always" id="Hgd-f7-Dvp"/>
+                    <connections>
+                        <outlet property="collectionView" destination="moZ-Qb-aaE" id="DXC-BZ-ot5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIR-Jj-p7a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

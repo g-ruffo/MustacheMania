@@ -13,4 +13,8 @@ struct K {
         static let recordVideoNav = "RecordVideoNavigation"
         static let videoListNav = "VideoListNavigation"
     }
+    
+    struct Cell {
+        static let videoCell = "VideoCell"
+    }
 }

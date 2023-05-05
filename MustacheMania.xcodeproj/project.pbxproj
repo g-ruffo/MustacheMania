@@ -20,6 +20,8 @@
 		796ACD3D2A048E8D009B03FA /* VideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD3C2A048E8D009B03FA /* VideoListViewController.swift */; };
 		796ACD3F2A048EA2009B03FA /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD3E2A048EA2009B03FA /* RecordVideoViewController.swift */; };
 		796ACD412A049350009B03FA /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD402A049350009B03FA /* TabBarController.swift */; };
+		796ACD4A2A04D604009B03FA /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD482A04D604009B03FA /* VideoCell.swift */; };
+		796ACD4B2A04D604009B03FA /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796ACD492A04D604009B03FA /* VideoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		796ACD3C2A048E8D009B03FA /* VideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewController.swift; sourceTree = "<group>"; };
 		796ACD3E2A048EA2009B03FA /* RecordVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		796ACD402A049350009B03FA /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		796ACD482A04D604009B03FA /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		796ACD492A04D604009B03FA /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				796ACD062A0486B5009B03FA /* Main.storyboard */,
+				796ACD482A04D604009B03FA /* VideoCell.swift */,
+				796ACD492A04D604009B03FA /* VideoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				796ACD102A0486B6009B03FA /* LaunchScreen.storyboard in Resources */,
+				796ACD4B2A04D604009B03FA /* VideoCell.xib in Resources */,
 				796ACD0D2A0486B6009B03FA /* Assets.xcassets in Resources */,
 				796ACD082A0486B5009B03FA /* Main.storyboard in Resources */,
 			);
@@ -311,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				796ACD3D2A048E8D009B03FA /* VideoListViewController.swift in Sources */,
+				796ACD4A2A04D604009B03FA /* VideoCell.swift in Sources */,
 				796ACD392A048BB0009B03FA /* Constants.swift in Sources */,
 				796ACD012A0486B5009B03FA /* AppDelegate.swift in Sources */,
 				796ACD3F2A048EA2009B03FA /* RecordVideoViewController.swift in Sources */,
