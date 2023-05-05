@@ -8,11 +8,19 @@
 import UIKit
 import CoreData
 
+protocol CoreDataServiceDelegate {
+    func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem])
 
+}
 class CoreDataService {
-    private var savedVideos: [RecordedVideoItem] = []
-    private let databaseContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var savedVideos: [RecordedVideoItem] = [] {
+        didSet { delegate?.videosHaveLoaded(self, loadedVideos: savedVideos)}
+    }
     private var currentVideo: RecordedVideoItem?
+
+    private let databaseContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var delegate: CoreDataServiceDelegate?
     
     //MARK: - Save Methods
     func saveToDatabase() {
