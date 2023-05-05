@@ -20,6 +20,7 @@ class RecordVideoViewController: UIViewController {
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     private var captureDevice: AVCaptureDevice?
     
+    
     private var coreDataService = CoreDataService()
 
     override func viewDidLoad() {
@@ -61,7 +62,7 @@ class RecordVideoViewController: UIViewController {
             print("Camera Permissions Restricted")
             break
         case .denied:
-            print("Camera Permissions Denied")
+            showAlertDialog()
             break
             // User has previously granted permissions.
         case .authorized:
@@ -72,7 +73,24 @@ class RecordVideoViewController: UIViewController {
     }
     
     func showAlertDialog() {
-        
+        DispatchQueue.main.async {
+            let message = "MustacheMania does not have permission to use the camera. Please allow in the application settings."
+            let alertController = UIAlertController(title: "Missing Permissions", message: message, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "OK",
+                                                    style: .cancel,
+                                                    handler: nil))
+            
+            alertController.addAction(UIAlertAction(title: "Settings",
+                                                    style: .default,
+                                                    handler: { _ in
+                                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                                                                  options: [:],
+                                                                                  completionHandler: nil)
+            }))
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 
     
