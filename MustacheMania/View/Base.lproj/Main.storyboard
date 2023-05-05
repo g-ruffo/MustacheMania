@@ -143,6 +143,7 @@
                         <outlet property="durationLabel" destination="42K-6G-hMb" id="kGB-k5-QiV"/>
                         <outlet property="durationViewContainer" destination="Evt-vN-zB0" id="FwD-lh-Gq3"/>
                         <outlet property="recordButton" destination="d8l-w1-bWB" id="LVy-iz-wYu"/>
+                        <outlet property="switchCameraMenuButton" destination="w7H-SE-daV" id="eMo-Mz-dXA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rc9-UE-37C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -182,7 +183,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YWS-0x-Fv0">
-                        <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

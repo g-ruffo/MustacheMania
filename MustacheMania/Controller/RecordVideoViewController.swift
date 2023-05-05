@@ -14,6 +14,7 @@ class RecordVideoViewController: UIViewController {
     @IBOutlet weak var durationViewContainer: UIView!
     @IBOutlet weak var durationImageView: UIImageView!
     @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var switchCameraMenuButton: UIBarButtonItem!
     
     private var captureSession: AVCaptureSession?
     private let videoOutput = AVCaptureMovieFileOutput()
@@ -141,10 +142,11 @@ class RecordVideoViewController: UIViewController {
             let buttonImage = self.videoOutput.isRecording ? UIImage(systemName: "record.circle") : UIImage(systemName: "stop")
             self.recordButton.setImage(buttonImage, for: .normal)
             self.durationViewContainer.alpha = self.videoOutput.isRecording ? 0 : 1
+            self.switchCameraMenuButton.isEnabled = self.videoOutput.isRecording
     }
     
     @IBAction func changeCameraButtonPressed(_ sender: UIBarButtonItem) {
-        
+        print("Switch Camera Pressed")
     }
     
 }
