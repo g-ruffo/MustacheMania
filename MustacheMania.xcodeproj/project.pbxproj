@@ -17,6 +17,7 @@
 		796ACD1B2A0486B6009B03FA /* MustacheManiaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD1A2A0486B6009B03FA /* MustacheManiaTests.swift */; };
 		796ACD252A0486B6009B03FA /* MustacheManiaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD242A0486B6009B03FA /* MustacheManiaUITests.swift */; };
 		796ACD272A0486B6009B03FA /* MustacheManiaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD262A0486B6009B03FA /* MustacheManiaUITestsLaunchTests.swift */; };
+		796ACD392A048BB0009B03FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD382A048BB0009B03FA /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		796ACD202A0486B6009B03FA /* MustacheManiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MustacheManiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		796ACD242A0486B6009B03FA /* MustacheManiaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MustacheManiaUITests.swift; sourceTree = "<group>"; };
 		796ACD262A0486B6009B03FA /* MustacheManiaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MustacheManiaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		796ACD382A048BB0009B03FA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +103,15 @@
 		796ACCFF2A0486B5009B03FA /* MustacheMania */ = {
 			isa = PBXGroup;
 			children = (
+				796ACD372A048BA6009B03FA /* Utils */,
+				796ACD332A048B11009B03FA /* Model */,
+				796ACD342A048B24009B03FA /* View */,
+				796ACD352A048B2C009B03FA /* Controller */,
 				796ACD002A0486B5009B03FA /* AppDelegate.swift */,
 				796ACD022A0486B5009B03FA /* SceneDelegate.swift */,
-				796ACD042A0486B5009B03FA /* ViewController.swift */,
-				796ACD062A0486B5009B03FA /* Main.storyboard */,
 				796ACD0C2A0486B6009B03FA /* Assets.xcassets */,
 				796ACD0E2A0486B6009B03FA /* LaunchScreen.storyboard */,
 				796ACD112A0486B6009B03FA /* Info.plist */,
-				796ACD092A0486B5009B03FA /* MustacheMania.xcdatamodeld */,
 			);
 			path = MustacheMania;
 			sourceTree = "<group>";
@@ -128,6 +131,46 @@
 				796ACD262A0486B6009B03FA /* MustacheManiaUITestsLaunchTests.swift */,
 			);
 			path = MustacheManiaUITests;
+			sourceTree = "<group>";
+		};
+		796ACD332A048B11009B03FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				796ACD362A048B60009B03FA /* Data */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		796ACD342A048B24009B03FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				796ACD062A0486B5009B03FA /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		796ACD352A048B2C009B03FA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				796ACD042A0486B5009B03FA /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		796ACD362A048B60009B03FA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				796ACD092A0486B5009B03FA /* MustacheMania.xcdatamodeld */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		796ACD372A048BA6009B03FA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				796ACD382A048BB0009B03FA /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				796ACD052A0486B5009B03FA /* ViewController.swift in Sources */,
+				796ACD392A048BB0009B03FA /* Constants.swift in Sources */,
 				796ACD012A0486B5009B03FA /* AppDelegate.swift in Sources */,
 				796ACD0B2A0486B5009B03FA /* MustacheMania.xcdatamodeld in Sources */,
 				796ACD032A0486B5009B03FA /* SceneDelegate.swift in Sources */,
