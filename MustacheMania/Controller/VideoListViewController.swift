@@ -13,11 +13,15 @@ class VideoListViewController: UIViewController {
     
     private var savedVideos: [RecordedVideoItem] = []
     
+    private var coreDataService = CoreDataService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set collection views delegates and datasource.
+        // Set collection views delegate and datasource.
         collectionView.delegate = self
         collectionView.dataSource = self
+        // Set CoreDataServices delegate.
+        coreDataService.delegate = self
         // Set navigation title to large.
         navigationController?.navigationBar.prefersLargeTitles = true
         // Register reusable cell with collection view.
@@ -51,6 +55,15 @@ extension VideoListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = collectionView.bounds.width / 4
         return CGSize(width: size, height: size)
+    }
+}
+
+extension VideoListViewController: CoreDataServiceDelegate {
+    func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem]) {
+        savedVideos = loadedVideos
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
 

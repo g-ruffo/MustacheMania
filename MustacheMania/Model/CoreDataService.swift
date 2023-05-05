@@ -12,6 +12,10 @@ protocol CoreDataServiceDelegate {
     func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem])
 
 }
+extension CoreDataServiceDelegate {
+    func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem]) {}
+    
+}
 class CoreDataService {
     private var savedVideos: [RecordedVideoItem] = [] {
         didSet { delegate?.videosHaveLoaded(self, loadedVideos: savedVideos)}
