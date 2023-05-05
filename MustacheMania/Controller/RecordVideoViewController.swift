@@ -30,7 +30,7 @@ class RecordVideoViewController: UIViewController {
         
         // Setup recording duration views
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
-        durationViewContainer.alpha = 0.8
+        durationViewContainer.alpha = 0
         
         view.layer.insertSublayer(videoPreviewLayer, below: recordButton.layer)
         
@@ -76,10 +76,7 @@ class RecordVideoViewController: UIViewController {
         DispatchQueue.main.async {
             let message = "MustacheMania does not have permission to use the camera. Please allow in the application settings."
             let alertController = UIAlertController(title: "Missing Permissions", message: message, preferredStyle: .alert)
-            
-            alertController.addAction(UIAlertAction(title: "OK",
-                                                    style: .cancel,
-                                                    handler: nil))
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             
             alertController.addAction(UIAlertAction(title: "Settings",
                                                     style: .default,
@@ -100,6 +97,8 @@ class RecordVideoViewController: UIViewController {
 
         // Find the default video device.
         guard let videoDevice = AVCaptureDevice.default(for: .video) else { return }
+        
+        captureDevice = videoDevice
 
         do {
             // Wrap the video device in a capture device input.
@@ -108,10 +107,14 @@ class RecordVideoViewController: UIViewController {
             if captureSession.canAddInput(videoInput) {
                 captureSession.addInput(videoInput)
             }
+            if captureSession.canAddOutput(videoOutput) {
+                captureSession.addOutput(videoOutput)
+            }
+            
+            captureSession.sessionPreset = .high
             // Set the preview layers session.
             videoPreviewLayer.session = captureSession
             videoPreviewLayer.videoGravity = .resizeAspectFill
-            
             // Start session.
             captureSession.startRunning()
             // Set session as global variable.
@@ -124,17 +127,20 @@ class RecordVideoViewController: UIViewController {
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
-        recordButton.imageView?.image = videoOutput.isRecording ? UIImage(systemName: "stop") : UIImage(systemName: "record.circle")
-//        if videoOutput.isRecording { videoOutput.stopRecording() }
-//        else {
-//            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//
-//            let fileUrl = paths[0].appendingPathComponent("output.mov")
-//
-//            try? FileManager.default.removeItem(at: fileUrl)
-//
-//            videoOutput.startRecording(to: fileUrl, recordingDelegate: self as AVCaptureFileOutputRecordingDelegate)
-//        }
+        if videoOutput.isRecording { videoOutput.stopRecording() }
+        else {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
+            let fileUrl = paths[0].appendingPathComponent("output.mov")
+
+            try? FileManager.default.removeItem(at: fileUrl)
+
+            videoOutput.startRecording(to: fileUrl, recordingDelegate: self as AVCaptureFileOutputRecordingDelegate)
+        }
+        
+            let buttonImage = self.videoOutput.isRecording ? UIImage(systemName: "record.circle") : UIImage(systemName: "stop")
+            self.recordButton.setImage(buttonImage, for: .normal)
+            self.durationViewContainer.alpha = self.videoOutput.isRecording ? 0 : 1
     }
     
     @IBAction func changeCameraButtonPressed(_ sender: UIBarButtonItem) {
