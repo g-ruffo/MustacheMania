@@ -9,21 +9,48 @@ import UIKit
 
 class VideoListViewController: UIViewController {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    private var savedVideos: [RecordedVideoItem] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Set collection views delegates and datasource.
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        // Set navigation title to large.
+        navigationController?.navigationBar.prefersLargeTitles = true
+        // Register reusable cell with collection view.
+        collectionView.register(VideoCell.nib(), forCellWithReuseIdentifier: K.Cell.videoCell)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+// MARK: - UICollectionViewDelegate
+extension VideoListViewController: UICollectionViewDelegate {
+    
+}
+
+// MARK: - UICollectionViewDataSource
+extension VideoListViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return savedVideos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.Cell.videoCell, for: indexPath) as! VideoCell
+        
+        return cell
+    }
+    
+    
+}
+
+// MARK: - UICollectionViewFlowLayout
+extension VideoListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = collectionView.bounds.width / 4
+        return CGSize(width: size, height: size)
+    }
+}
+
