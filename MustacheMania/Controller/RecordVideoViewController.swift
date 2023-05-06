@@ -15,7 +15,7 @@ class RecordVideoViewController: UIViewController {
     @IBOutlet weak var durationImageView: UIImageView!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var switchCameraMenuButton: UIBarButtonItem!
-    
+    @IBOutlet weak var videoPreviewView: UIView!
     private var captureSession: AVCaptureSession?
     private let videoOutput = AVCaptureMovieFileOutput()
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
@@ -33,7 +33,7 @@ class RecordVideoViewController: UIViewController {
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
         
-        view.layer.insertSublayer(videoPreviewLayer, below: recordButton.layer)
+        videoPreviewView.layer.addSublayer(videoPreviewLayer)
         
         checkUserPermissions()
         
