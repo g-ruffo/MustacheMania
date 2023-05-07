@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import RealityKit
 
 class RecordVideoViewController: UIViewController {
     
@@ -15,12 +16,13 @@ class RecordVideoViewController: UIViewController {
     @IBOutlet weak var durationImageView: UIImageView!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var switchCameraMenuButton: UIBarButtonItem!
-    @IBOutlet weak var videoPreviewView: UIView!
+    @IBOutlet weak var arView: ARView!
+    
     private var captureSession: AVCaptureSession?
     private let videoOutput = AVCaptureMovieFileOutput()
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     private var captureDevice: AVCaptureDevice?
-    
+    private var isUsingFrontCamera = true
     
     private var coreDataService = CoreDataService()
 
@@ -32,19 +34,8 @@ class RecordVideoViewController: UIViewController {
         // Setup recording duration views
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
-        
-        videoPreviewView.layer.addSublayer(videoPreviewLayer)
-        
-        checkUserPermissions()
-        
     }
     
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        videoPreviewLayer.frame = view.bounds
-    
-    }
     func checkUserPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             // Request permissions and handle the response
@@ -95,9 +86,10 @@ class RecordVideoViewController: UIViewController {
     func setupCamera() {
         // Create the capture session.
         let captureSession = AVCaptureSession()
-
+        
         // Find the default video device.
         guard let videoDevice = AVCaptureDevice.default(for: .video) else { return }
+        
         
         captureDevice = videoDevice
 
@@ -113,11 +105,12 @@ class RecordVideoViewController: UIViewController {
             }
             
             captureSession.sessionPreset = .high
-            // Set the preview layers session.
-            videoPreviewLayer.session = captureSession
-            videoPreviewLayer.videoGravity = .resizeAspectFill
+//            // Set the preview layers session.
+//            videoPreviewLayer.session = captureSession
+//            videoPreviewLayer.videoGravity = .resizeAspectFill
             // Start session.
             captureSession.startRunning()
+            setupARView()
             // Set session as global variable.
             self.captureSession = captureSession
             
@@ -126,6 +119,27 @@ class RecordVideoViewController: UIViewController {
             print("Error configuring camera = \(error.localizedDescription)")
         }
     }
+    
+    func setupARView() {
+         let anchor = AnchorEntity(plane: .horizontal, minimumBounds:[0.2, 0.2])
+         arView.scene.addAnchor(anchor)
+        var mustaches: [Entity] = []
+        for _ in 1...4 {
+            let box = MeshResource.generateBox(width: 0.04, height: 0.002, depth: 0.04)
+            let metalMaterial = SimpleMaterial(color: .gray, isMetallic: true)
+            let model = ModelEntity(mesh: box, materials: [metalMaterial])
+            
+            model.generateCollisionShapes(recursive: true)
+            mustaches.append(model)
+        }
+        
+        for (index, mustache) in mustaches.enumerated() {
+            let x = Float(index % 2)
+            let z = Float(index / 2)
+            mustache.position = [x * 0.1, 0 , z * 0.1]
+            anchor.addChild(mustache)
+        }
+     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
         if videoOutput.isRecording { videoOutput.stopRecording() }

@@ -78,9 +78,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HjN-jE-sFT" userLabel="VideoPreviewView">
+                            <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTe-gV-Axz">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </view>
+                            </arView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8l-w1-bWB">
                                 <rect key="frame" x="110" y="456" width="100" height="100"/>
                                 <constraints>
@@ -129,11 +129,11 @@
                             <constraint firstItem="d8l-w1-bWB" firstAttribute="top" secondItem="Evt-vN-zB0" secondAttribute="bottom" constant="12" id="37L-bh-syu"/>
                             <constraint firstItem="vqf-oG-b79" firstAttribute="trailing" secondItem="Evt-vN-zB0" secondAttribute="trailing" constant="12" id="3Xo-fT-dei"/>
                             <constraint firstItem="d8l-w1-bWB" firstAttribute="centerX" secondItem="bHD-M1-2B9" secondAttribute="centerX" id="A90-bY-bHN"/>
+                            <constraint firstItem="BTe-gV-Axz" firstAttribute="trailing" secondItem="vqf-oG-b79" secondAttribute="trailing" id="AGv-Dg-oBp"/>
+                            <constraint firstItem="BTe-gV-Axz" firstAttribute="leading" secondItem="vqf-oG-b79" secondAttribute="leading" id="IlB-nX-kYQ"/>
+                            <constraint firstItem="BTe-gV-Axz" firstAttribute="bottom" secondItem="vqf-oG-b79" secondAttribute="bottom" id="Ovz-QN-9Lj"/>
                             <constraint firstItem="vqf-oG-b79" firstAttribute="bottom" secondItem="d8l-w1-bWB" secondAttribute="bottom" constant="12" id="jFa-qQ-4cL"/>
-                            <constraint firstItem="HjN-jE-sFT" firstAttribute="bottom" secondItem="vqf-oG-b79" secondAttribute="bottom" id="kfg-Lh-Ec2"/>
-                            <constraint firstItem="HjN-jE-sFT" firstAttribute="top" secondItem="bHD-M1-2B9" secondAttribute="top" id="qT3-sN-tQY"/>
-                            <constraint firstItem="HjN-jE-sFT" firstAttribute="trailing" secondItem="vqf-oG-b79" secondAttribute="trailing" id="umP-Y3-V2b"/>
-                            <constraint firstItem="HjN-jE-sFT" firstAttribute="leading" secondItem="vqf-oG-b79" secondAttribute="leading" id="y4f-J7-5h3"/>
+                            <constraint firstItem="BTe-gV-Axz" firstAttribute="top" secondItem="bHD-M1-2B9" secondAttribute="top" id="utj-j0-M7f"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="VXt-9d-Fge">
@@ -146,12 +146,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="arView" destination="BTe-gV-Axz" id="XZI-93-sRm"/>
                         <outlet property="durationImageView" destination="lVh-3q-fED" id="qoM-lq-8PC"/>
                         <outlet property="durationLabel" destination="42K-6G-hMb" id="kGB-k5-QiV"/>
                         <outlet property="durationViewContainer" destination="Evt-vN-zB0" id="FwD-lh-Gq3"/>
                         <outlet property="recordButton" destination="d8l-w1-bWB" id="LVy-iz-wYu"/>
                         <outlet property="switchCameraMenuButton" destination="w7H-SE-daV" id="eMo-Mz-dXA"/>
-                        <outlet property="videoPreviewView" destination="HjN-jE-sFT" id="Rew-X7-1Hx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rc9-UE-37C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
