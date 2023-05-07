@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import AVFoundation
-import RealityKit
+import SceneKit
+import ARKit
+import ARVideoKit
 
 class RecordVideoViewController: UIViewController {
     
@@ -16,14 +17,14 @@ class RecordVideoViewController: UIViewController {
     @IBOutlet weak var durationImageView: UIImageView!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var switchCameraMenuButton: UIBarButtonItem!
-    @IBOutlet weak var arView: ARView!
-    
+    @IBOutlet weak var sceneView: ARSCNView!
     private var captureSession: AVCaptureSession?
     private let videoOutput = AVCaptureMovieFileOutput()
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     private var captureDevice: AVCaptureDevice?
     private var isUsingFrontCamera = true
-    
+    var recorder:RecordAR?
+
     private var coreDataService = CoreDataService()
 
     override func viewDidLoad() {
