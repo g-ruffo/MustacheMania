@@ -115,7 +115,6 @@
 				F219F389791F379F04565B89 /* Pods-MustacheManiaTests.debug.xcconfig */,
 				6E332FDFD8D67BFCF1C674F6 /* Pods-MustacheManiaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
