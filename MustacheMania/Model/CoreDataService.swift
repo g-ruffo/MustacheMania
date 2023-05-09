@@ -10,7 +10,6 @@ import CoreData
 
 protocol CoreDataServiceDelegate {
     func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem])
-
 }
 extension CoreDataServiceDelegate {
     func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem]) {}
@@ -24,7 +23,7 @@ class CoreDataService {
     
     var delegate: CoreDataServiceDelegate?
     
-    //MARK: - Save Methods
+    //MARK: - Save Method
     func saveToDatabase() {
         do {
             try databaseContext.save()
@@ -33,8 +32,8 @@ class CoreDataService {
         }
     }
     
-    //MARK: - Create Video Methods
-    func createUpdateVideo(tag: String, duration: String, fileName: String) {
+    //MARK: - Create Video Method
+    func createVideo(tag: String, duration: String, fileName: String) {
         let video = RecordedVideoItem(context: databaseContext)
         video.tag = tag
         video.duration = duration
@@ -42,7 +41,7 @@ class CoreDataService {
         saveToDatabase()
     }
     
-    //MARK: - Get Video Methods
+    //MARK: - Get Videos Method
     func loadVideosFromDatabase() {
         let request: NSFetchRequest<RecordedVideoItem> = RecordedVideoItem.fetchRequest()
         do{
@@ -50,5 +49,19 @@ class CoreDataService {
         } catch {
             print("Error loading files from core data = \(error)")
         }
+    }
+    //MARK: - Create Update Method
+    func updateVideo(newTag: String, atIndex index: Int) {
+        let video = savedVideos[index]
+        video.tag = newTag
+        saveToDatabase()
+        delegate?.videosHaveLoaded(self, loadedVideos: savedVideos)
+    }
+    
+    //MARK: - Delete Video Method
+    func deleteVideo(atIndex index: Int) {
+        databaseContext.delete(savedVideos[index])
+        saveToDatabase()
+        loadVideosFromDatabase()
     }
 }
