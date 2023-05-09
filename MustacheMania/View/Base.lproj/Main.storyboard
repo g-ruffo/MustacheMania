@@ -42,7 +42,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="moZ-Qb-aaE">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="6" y="76" width="308" height="492"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="4" id="GJo-xE-BV8">
                                     <size key="itemSize" width="228" height="228"/>
@@ -56,9 +56,9 @@
                         <viewLayoutGuide key="safeArea" id="mAe-7U-Wdm"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="moZ-Qb-aaE" firstAttribute="leading" secondItem="mAe-7U-Wdm" secondAttribute="leading" id="KfD-wj-MgK"/>
-                            <constraint firstItem="moZ-Qb-aaE" firstAttribute="top" secondItem="mAe-7U-Wdm" secondAttribute="top" id="L0o-A7-ShV"/>
-                            <constraint firstItem="mAe-7U-Wdm" firstAttribute="trailing" secondItem="moZ-Qb-aaE" secondAttribute="trailing" id="Vnh-4A-ciE"/>
+                            <constraint firstItem="moZ-Qb-aaE" firstAttribute="leading" secondItem="mAe-7U-Wdm" secondAttribute="leading" constant="6" id="KfD-wj-MgK"/>
+                            <constraint firstItem="moZ-Qb-aaE" firstAttribute="top" secondItem="mAe-7U-Wdm" secondAttribute="top" constant="12" id="L0o-A7-ShV"/>
+                            <constraint firstItem="mAe-7U-Wdm" firstAttribute="trailing" secondItem="moZ-Qb-aaE" secondAttribute="trailing" constant="6" id="Vnh-4A-ciE"/>
                             <constraint firstItem="mAe-7U-Wdm" firstAttribute="bottom" secondItem="moZ-Qb-aaE" secondAttribute="bottom" id="o0V-Q9-mTA"/>
                         </constraints>
                     </view>
