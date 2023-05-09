@@ -28,10 +28,10 @@
                         <color key="backgroundColor" systemColor="labelColor"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wv6-Ni-mji">
-                        <rect key="frame" x="159.33333333333334" y="195.66666666666666" width="60.666666666666657" height="24.333333333333343"/>
+                        <rect key="frame" x="163.33333333333334" y="205.66666666666666" width="60.666666666666657" height="14.333333333333343"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:15:34" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3B-eg-fru">
-                                <rect key="frame" x="5" y="5.0000000000000009" width="50.666666666666664" height="14.333333333333336"/>
+                                <rect key="frame" x="5" y="0.0" width="50.666666666666664" height="14.333333333333334"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -39,9 +39,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="e3B-eg-fru" firstAttribute="top" secondItem="Wv6-Ni-mji" secondAttribute="top" constant="5" id="2qH-9V-luv"/>
+                            <constraint firstItem="e3B-eg-fru" firstAttribute="top" secondItem="Wv6-Ni-mji" secondAttribute="top" id="2qH-9V-luv"/>
                             <constraint firstItem="e3B-eg-fru" firstAttribute="leading" secondItem="Wv6-Ni-mji" secondAttribute="leading" constant="5" id="LhY-ox-UTF"/>
-                            <constraint firstAttribute="bottom" secondItem="e3B-eg-fru" secondAttribute="bottom" constant="5" id="o53-Ng-Hi1"/>
+                            <constraint firstAttribute="bottom" secondItem="e3B-eg-fru" secondAttribute="bottom" id="o53-Ng-Hi1"/>
                             <constraint firstAttribute="trailing" secondItem="e3B-eg-fru" secondAttribute="trailing" constant="5" id="rlW-8j-hbO"/>
                         </constraints>
                     </view>
@@ -63,7 +63,7 @@
                 <constraint firstItem="EWE-yi-Gm5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XiZ-1y-2Ds"/>
                 <constraint firstItem="EWE-yi-Gm5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bQo-Ce-bp1"/>
                 <constraint firstAttribute="bottom" secondItem="EWE-yi-Gm5" secondAttribute="bottom" id="gQh-47-bcU"/>
-                <constraint firstAttribute="trailing" secondItem="Wv6-Ni-mji" secondAttribute="trailing" constant="8" id="gy4-gn-IyU"/>
+                <constraint firstAttribute="trailing" secondItem="Wv6-Ni-mji" secondAttribute="trailing" constant="4" id="gy4-gn-IyU"/>
                 <constraint firstItem="z5Q-0z-8dM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mzF-Lz-OqO"/>
                 <constraint firstAttribute="bottom" secondItem="Wv6-Ni-mji" secondAttribute="bottom" constant="8" id="pKW-0x-Q0d"/>
             </constraints>
