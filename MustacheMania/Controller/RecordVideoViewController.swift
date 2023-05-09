@@ -186,9 +186,11 @@ class RecordVideoViewController: UIViewController {
 
     
     func setupCamera(hasPermissions: Bool) {
-        recordButton.isEnabled = hasPermissions
-        mustacheButton.isEnabled = hasPermissions
-        clickScreenLabel.text = hasPermissions ? "Click screen to set mustache!" : "Camera Permissions Required"
+        DispatchQueue.main.async {
+            self.recordButton.isEnabled = hasPermissions
+            self.mustacheButton.isEnabled = hasPermissions
+            self.clickScreenLabel.text = hasPermissions ? "Click screen to set mustache!" : "Camera Permissions Required"
+        }
     }
     
     @IBAction func mustacheButtonPressed(_ sender: UIButton) {
