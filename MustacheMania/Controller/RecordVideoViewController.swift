@@ -25,6 +25,7 @@ class RecordVideoViewController: UIViewController {
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     private var captureDevice: AVCaptureDevice?
     private var recorder: RecordAR?
+    private let recordingQueue = DispatchQueue(label: "recordingThread")
     private var timer: Timer?
     private var toggleDurationImage = true
     private var counter: Double = 0.0 {
@@ -65,27 +66,28 @@ class RecordVideoViewController: UIViewController {
         // Set RecordAR delegate.
         recorder?.delegate = self
         recorder?.deleteCacheWhenExported = true
-        recorder?.onlyRenderWhileRecording = true
+        recorder?.requestMicPermission = .manual
         // Setup recording duration views
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
         mustacheButton.layer.cornerRadius = 20
-        
         addTapGestureToSceneView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkUserVideoPermissions()
+        checkUserAudioPermissions()
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         recorder?.prepare(configuration)
-        checkUserPermissions()
         // Run the view's session
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
         recorder?.rest()
         // Pause the view's session
         sceneView.session.pause()
@@ -119,13 +121,14 @@ class RecordVideoViewController: UIViewController {
     }
 
     
-    func checkUserPermissions() {
+    func checkUserVideoPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             // Request permissions and handle the response
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] isGranted in
                 guard isGranted else {
                     self?.showAlertDialog()
+                    self?.setupCamera(hasPermissions: false)
                     return
                 }
                 self?.setupCamera(hasPermissions: true)
@@ -142,6 +145,28 @@ class RecordVideoViewController: UIViewController {
         case .authorized:
             setupCamera(hasPermissions: true)
         @unknown default:
+            break
+        }
+    }
+    
+    func checkUserAudioPermissions() {
+        switch AVCaptureDevice.authorizationStatus(for: .audio) {
+            // Request permissions and handle the response
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .audio) { isGranted in
+                self.recorder?.enableAudio = isGranted
+            }
+        case .restricted:
+            recorder?.enableAudio = false
+            break
+        case .denied:
+            recorder?.enableAudio = false
+            break
+        case .authorized:
+            recorder?.enableAudio = false
+            break
+        @unknown default:
+            recorder?.enableAudio = false
             break
         }
     }
@@ -193,6 +218,8 @@ class RecordVideoViewController: UIViewController {
         }
     }
     
+    
+    
     @IBAction func mustacheButtonPressed(_ sender: UIButton) {
         mustacheNumber += 1
         mustacheButton.setImage(UIImage(named: "mustache\(mustacheNumber)"), for: .normal)
@@ -207,12 +234,11 @@ class RecordVideoViewController: UIViewController {
             self.recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
             self.durationViewContainer.alpha = 0
         } else {
+            recordingQueue.async { self.recorder?.record() }
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCounterChanged), userInfo: nil, repeats: true)
-            recorder?.record()
             counter = 0.0
             self.recordButton.setImage(UIImage(systemName: "stop"), for: .normal)
             self.durationViewContainer.alpha = 1
-
         }
     }
     
