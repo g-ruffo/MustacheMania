@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SpriteKit
 import ARKit
 import ARVideoKit
 
@@ -30,7 +29,7 @@ class RecordVideoViewController: UIViewController {
     private var toggleDurationImage = true
     private var counter: Double = 0.0 {
         didSet {
-            DispatchQueue.main.async { 
+            DispatchQueue.main.async {
                 self.durationLabel.text = self.manager.getTimestampFromSeconds(secondsDouble: self.counter)
                 self.durationImageView.alpha = self.toggleDurationImage ? 1 : 0
                 self.toggleDurationImage.toggle()
@@ -54,10 +53,10 @@ class RecordVideoViewController: UIViewController {
             }
         }
     }
-
+    
     private var coreDataService = CoreDataService()
     private let manager = RecordVideoManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set SceneView delegate.
@@ -66,20 +65,22 @@ class RecordVideoViewController: UIViewController {
         // Set RecordAR delegate.
         recorder?.delegate = self
         recorder?.deleteCacheWhenExported = true
+        // Manually request audio permissions.
         recorder?.requestMicPermission = .manual
-        // Setup recording duration views
+        // Setup recording duration views.
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
+        // Add corner radius to mustache button.
         mustacheButton.layer.cornerRadius = 20
         addTapGestureToSceneView()
-        
+        // Add notification observer to listen for when the app enters the background.
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkUserVideoPermissions()
@@ -93,9 +94,10 @@ class RecordVideoViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // If currently recording stop before navigating away.
         stopVideoRecording()
         recorder?.rest()
-        // Pause the view's session
+        // Pause the view's session.
         sceneView.session.pause()
     }
     
@@ -103,16 +105,17 @@ class RecordVideoViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didReceiveTapGesture(_:)))
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
-
+    
     @objc func didReceiveTapGesture(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
         guard let hitTestResult = sceneView.hitTest(location, types: [.featurePoint]).first
-            else { return }
+        else { return }
         let anchor = ARAnchor(transform: hitTestResult.worldTransform)
         sceneView.session.add(anchor: anchor)
     }
     
     @objc func didEnterBackground() {
+        // Stop recording when app enters background.
         stopVideoRecording()
     }
     
@@ -129,11 +132,11 @@ class RecordVideoViewController: UIViewController {
         sphereGeometry.materials = [material]
         return sphereGeometry
     }
-
+    
     
     func checkUserVideoPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-            // Request permissions and handle the response
+            // Request permissions and handle the response.
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] isGranted in
                 guard isGranted else {
@@ -161,7 +164,7 @@ class RecordVideoViewController: UIViewController {
     
     func checkUserAudioPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .audio) {
-            // Request permissions and handle the response
+            // Request permissions and handle the response.
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .audio) { isGranted in
                 self.recorder?.enableAudio = isGranted
@@ -173,7 +176,8 @@ class RecordVideoViewController: UIViewController {
             recorder?.enableAudio = false
             break
         case .authorized:
-            recorder?.enableAudio = false
+            // User has previously granted permissions.
+            recorder?.enableAudio = true
             break
         @unknown default:
             recorder?.enableAudio = false
@@ -190,9 +194,9 @@ class RecordVideoViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "Settings",
                                                     style: .default,
                                                     handler: { _ in
-                                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
-                                                                                  options: [:],
-                                                                                  completionHandler: nil)
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                          options: [:],
+                                          completionHandler: nil)
             }))
             
             self.present(alertController, animated: true, completion: nil)
@@ -205,23 +209,23 @@ class RecordVideoViewController: UIViewController {
             alertController.addTextField { field in
                 field.placeholder = "Enter Tag"
                 field.returnKeyType = .done
-                
             }
-
+            
             alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
                 guard let textField = alertController.textFields?.first else { return }
                 self.exportVideo(tag: textField.text ?? "", tempUrl)
             }))
             
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
+            
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
+    
     
     func setupCamera(hasPermissions: Bool) {
         DispatchQueue.main.async {
+            // Disable buttons if permissions have been denied.
             self.recordButton.isEnabled = hasPermissions
             self.mustacheButton.isEnabled = hasPermissions
             self.clickScreenLabel.text = hasPermissions ? "Click screen to set mustache!" : "Camera Permissions Required"
@@ -229,6 +233,7 @@ class RecordVideoViewController: UIViewController {
     }
     
     func stopVideoRecording() {
+        // Stop recording and invalidate timer.
         recorder?.stop()
         timer?.invalidate()
         timer = nil
@@ -237,6 +242,7 @@ class RecordVideoViewController: UIViewController {
     }
     
     @IBAction func mustacheButtonPressed(_ sender: UIButton) {
+        // Increment mustache number and update image.
         mustacheNumber += 1
         mustacheButton.setImage(UIImage(named: "mustache\(mustacheNumber)"), for: .normal)
         if let _ = currentMustache { currentMustache?.geometry = createGeometry() }
@@ -246,31 +252,42 @@ class RecordVideoViewController: UIViewController {
         if recorder?.status == .recording {
             stopVideoRecording()
         } else {
+            // If camera is not recording start the recorder and timer.
             recordingQueue.async { self.recorder?.record() }
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCounterChanged), userInfo: nil, repeats: true)
             counter = 0.0
+            // Change record button image.
             self.recordButton.setImage(UIImage(systemName: "stop"), for: .normal)
+            // Make recording duration counter visible.
             self.durationViewContainer.alpha = 1
         }
     }
-    
+    // Update timer counter seconds.
     @objc func timeCounterChanged() { self.counter += 1 }
     
     func exportVideo(tag: String, _ tempUrl: URL) {
+        // Create new file name.
         let fileName = "\(Date().timeIntervalSince1970).mp4"
+        // Get the document directory path.
         let destinationPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         guard let path = destinationPath else { return }
+        // Append the new file name to document directory.
         let url = path.appendingPathComponent(fileName)
         do {
+            // Convert the temporary recording url to data.
             let data = try Data(contentsOf: tempUrl)
+            // Write video data to document directory.
             try data.write(to: url)
+            // Get the videos duration.
             let duration = AVURLAsset(url: url).duration.seconds
+            // Convert the duration double to a timestamp string.
             let timestamp = manager.getTimestampFromSeconds(secondsDouble: duration)
             self.coreDataService.createVideo(tag: tag, duration: timestamp, fileName: fileName)
+            // Notify observer about change to the database.
             NotificationCenter.default.post(name: Notification.Name("Update"), object: nil)
-             } catch {
-                 print(error.localizedDescription)
-             }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
 }
@@ -278,7 +295,7 @@ class RecordVideoViewController: UIViewController {
 // MARK: - ARSCNViewDelegate
 extension RecordVideoViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard !(anchor is ARPlaneAnchor) else { return }
+        // Remove existing node before adding new one.
         currentMustache?.removeFromParentNode()
         currentMustache = createMustacheNode()
         guard let _ = currentMustache else { return }

@@ -14,7 +14,6 @@ class VideoListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var savedVideos: [RecordedVideoItem] = []
-    
     private var coreDataService = CoreDataService()
     
     override func viewDidLoad() {
@@ -29,7 +28,7 @@ class VideoListViewController: UIViewController {
         // Register reusable cell with collection view.
         collectionView.register(VideoCell.nib(), forCellWithReuseIdentifier: K.Cell.videoCell)
         coreDataService.loadVideosFromDatabase()
-        
+        // Add notification observer to listen for database changes.
         NotificationCenter.default.addObserver(self, selector: #selector(videosUpdated), name: NSNotification.Name("Update"), object: nil)
     }
     
@@ -53,7 +52,6 @@ class VideoListViewController: UIViewController {
     func getThumbnailImage(forUrl url: URL) -> UIImage? {
         let asset: AVAsset = AVAsset(url: url)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
-
         do {
             let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
             return UIImage(cgImage: thumbnailImage)
@@ -66,7 +64,6 @@ class VideoListViewController: UIViewController {
     
     func editPlayAlert(atIndex index: Int) {
         let video = savedVideos[index]
-    
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: "Edit or Play Video", message: nil, preferredStyle: .alert)
             alertController.addTextField { field in
@@ -139,11 +136,12 @@ extension VideoListViewController: UICollectionViewDataSource {
         if let fileName = video.videoName {
             let videoPath = fileInDocumentsDirectory(fileName: fileName)
             if let url = videoPath {
+                // Set the cells image view.
                 cell.videoPreviewImage.image = getThumbnailImage(forUrl: url)
                 cell.videoPreviewImage.contentMode = .scaleAspectFill
             }
         }
-        cell.layer.cornerRadius = 10
+        
         return cell
     }
 }
@@ -151,6 +149,7 @@ extension VideoListViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewFlowLayout
 extension VideoListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Calculate the cell size.
         let cellsPerRow: CGFloat = 3
         let width = collectionView.bounds.width / cellsPerRow
         return CGSize(width: width - cellsPerRow, height: width - cellsPerRow)

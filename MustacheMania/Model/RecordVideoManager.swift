@@ -8,7 +8,7 @@
 import Foundation
 
 struct RecordVideoManager {
-    
+    // Convert seconds as double and return timestamp formatted string.
     func getTimestampFromSeconds(secondsDouble: Double) -> String {
         let secondsInt = Int(secondsDouble)
             let seconds = secondsInt % 60

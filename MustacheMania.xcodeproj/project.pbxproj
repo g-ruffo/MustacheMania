@@ -661,10 +661,14 @@
 				DEVELOPMENT_TEAM = QL7G84W3RH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MustacheMania/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required to record a new video.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Required to record audio for video.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -690,10 +694,14 @@
 				DEVELOPMENT_TEAM = QL7G84W3RH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MustacheMania/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required to record a new video.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Required to record audio for video.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -16,12 +16,12 @@ class VideoCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // Add corner radius to duration container and cell.
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
+        self.layer.cornerRadius = 10
     }
     
     static func nib() -> UINib {
         return UINib(nibName: K.Cell.videoCell, bundle: nil)
     }
-    
 }
