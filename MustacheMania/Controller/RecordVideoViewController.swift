@@ -72,8 +72,14 @@ class RecordVideoViewController: UIViewController {
         durationViewContainer.alpha = 0
         mustacheButton.layer.cornerRadius = 20
         addTapGestureToSceneView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkUserVideoPermissions()
@@ -87,7 +93,7 @@ class RecordVideoViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        stopVideoRecording()
         recorder?.rest()
         // Pause the view's session
         sceneView.session.pause()
@@ -104,6 +110,10 @@ class RecordVideoViewController: UIViewController {
             else { return }
         let anchor = ARAnchor(transform: hitTestResult.worldTransform)
         sceneView.session.add(anchor: anchor)
+    }
+    
+    @objc func didEnterBackground() {
+        stopVideoRecording()
     }
     
     func createMustacheNode() -> SCNNode {
@@ -218,7 +228,13 @@ class RecordVideoViewController: UIViewController {
         }
     }
     
-    
+    func stopVideoRecording() {
+        recorder?.stop()
+        timer?.invalidate()
+        timer = nil
+        self.recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
+        self.durationViewContainer.alpha = 0
+    }
     
     @IBAction func mustacheButtonPressed(_ sender: UIButton) {
         mustacheNumber += 1
@@ -228,11 +244,7 @@ class RecordVideoViewController: UIViewController {
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
         if recorder?.status == .recording {
-            recorder?.stop()
-            timer?.invalidate()
-            timer = nil
-            self.recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
-            self.durationViewContainer.alpha = 0
+            stopVideoRecording()
         } else {
             recordingQueue.async { self.recorder?.record() }
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCounterChanged), userInfo: nil, repeats: true)
