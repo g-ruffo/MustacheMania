@@ -87,8 +87,6 @@ class RecordVideoViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         recorder?.rest()
-        currentMustache?.removeFromParentNode()
-        currentMustache = nil
         // Pause the view's session
         sceneView.session.pause()
     }

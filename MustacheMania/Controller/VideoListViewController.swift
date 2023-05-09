@@ -151,7 +151,9 @@ extension VideoListViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewFlowLayout
 extension VideoListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 120)
+        let cellsPerRow: CGFloat = 3
+        let width = collectionView.bounds.width / cellsPerRow
+        return CGSize(width: width - cellsPerRow, height: width - cellsPerRow)
     }
 }
 
