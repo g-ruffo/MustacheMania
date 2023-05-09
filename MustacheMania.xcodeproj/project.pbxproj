@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B8AF55C375249F48E5C9462 /* Pods_MustacheMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E077D61C1AEC9F80B40DAEBF /* Pods_MustacheMania.framework */; };
 		79635366BA077D4C92777D30 /* Pods_MustacheMania_MustacheManiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD0D31A7BAED83E6E1161D4 /* Pods_MustacheMania_MustacheManiaUITests.framework */; };
+		796995172A09D8DE002A8502 /* RecordVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796995162A09D8DE002A8502 /* RecordVideoManager.swift */; };
 		796ACD012A0486B5009B03FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD002A0486B5009B03FA /* AppDelegate.swift */; };
 		796ACD032A0486B5009B03FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD022A0486B5009B03FA /* SceneDelegate.swift */; };
 		796ACD082A0486B5009B03FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 796ACD062A0486B5009B03FA /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		3A652E05DBA58D1CD840B466 /* Pods-MustacheMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheMania.debug.xcconfig"; path = "Target Support Files/Pods-MustacheMania/Pods-MustacheMania.debug.xcconfig"; sourceTree = "<group>"; };
 		48A41D0319399E8239BAFD89 /* Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MustacheMania-MustacheManiaUITests/Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E332FDFD8D67BFCF1C674F6 /* Pods-MustacheManiaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheManiaTests.release.xcconfig"; path = "Target Support Files/Pods-MustacheManiaTests/Pods-MustacheManiaTests.release.xcconfig"; sourceTree = "<group>"; };
+		796995162A09D8DE002A8502 /* RecordVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoManager.swift; sourceTree = "<group>"; };
 		796ACCFD2A0486B5009B03FA /* MustacheMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MustacheMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		796ACD002A0486B5009B03FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		796ACD022A0486B5009B03FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			children = (
 				796ACD362A048B60009B03FA /* Data */,
 				796ACD4C2A04DC43009B03FA /* CoreDataService.swift */,
+				796995162A09D8DE002A8502 /* RecordVideoManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				796ACD012A0486B5009B03FA /* AppDelegate.swift in Sources */,
 				796ACD3F2A048EA2009B03FA /* RecordVideoViewController.swift in Sources */,
 				796ACD412A049350009B03FA /* TabBarController.swift in Sources */,
+				796995172A09D8DE002A8502 /* RecordVideoManager.swift in Sources */,
 				796ACD0B2A0486B5009B03FA /* MustacheMania.xcdatamodeld in Sources */,
 				796ACD4D2A04DC43009B03FA /* CoreDataService.swift in Sources */,
 				796ACD032A0486B5009B03FA /* SceneDelegate.swift in Sources */,
