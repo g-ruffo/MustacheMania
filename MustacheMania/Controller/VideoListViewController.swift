@@ -32,13 +32,9 @@ class VideoListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(videosUpdated), name: NSNotification.Name("Update"), object: nil)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
     
-    @objc func videosUpdated() {
-        coreDataService.loadVideosFromDatabase()
-    }
+    @objc func videosUpdated() { coreDataService.loadVideosFromDatabase() }
     
     func fileInDocumentsDirectory(fileName: String) -> URL? {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -104,7 +100,7 @@ class VideoListViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-    
+    // Play selected video from URL.
     func playVideo(atUrl url: URL) {
         let player = AVPlayer(url: url)
         let playerViewController = AVPlayerViewController()
@@ -159,9 +155,7 @@ extension VideoListViewController: UICollectionViewDelegateFlowLayout {
 extension VideoListViewController: CoreDataServiceDelegate {
     func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem]) {
         savedVideos = loadedVideos
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        DispatchQueue.main.async { self.collectionView.reloadData() }
     }
 }
 

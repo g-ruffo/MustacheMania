@@ -13,7 +13,6 @@ protocol CoreDataServiceDelegate {
 }
 extension CoreDataServiceDelegate {
     func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem]) {}
-    
 }
 class CoreDataService {
     private var savedVideos: [RecordedVideoItem] = [] {
