@@ -40,8 +40,8 @@
                             <constraint firstAttribute="trailing" secondItem="e3B-eg-fru" secondAttribute="trailing" constant="5" id="rlW-8j-hbO"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big Beard" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Q-0z-8dM">
-                        <rect key="frame" x="68.666666666666657" y="16.666666666666668" width="90.666666666666657" height="24.000000000000004"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big Beard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Q-0z-8dM">
+                        <rect key="frame" x="0.0" y="16.666666666666668" width="228" height="24.000000000000004"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -50,12 +50,14 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="z5Q-0z-8dM" secondAttribute="trailing" id="2kc-gp-WhL"/>
                 <constraint firstItem="Wv6-Ni-mji" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.75" id="62N-Ug-VGT"/>
                 <constraint firstAttribute="trailing" secondItem="EWE-yi-Gm5" secondAttribute="trailing" id="7im-Eg-cyc"/>
                 <constraint firstItem="z5Q-0z-8dM" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ClQ-EG-dw0"/>
                 <constraint firstItem="EWE-yi-Gm5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XiZ-1y-2Ds"/>
                 <constraint firstItem="EWE-yi-Gm5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bQo-Ce-bp1"/>
                 <constraint firstAttribute="bottom" secondItem="EWE-yi-Gm5" secondAttribute="bottom" id="gQh-47-bcU"/>
+                <constraint firstItem="z5Q-0z-8dM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mzF-Lz-OqO"/>
                 <constraint firstItem="z5Q-0z-8dM" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.25" id="nnK-ui-rRW"/>
                 <constraint firstItem="Wv6-Ni-mji" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" multiplier="1.5" id="roa-Qe-Deb"/>
             </constraints>
