@@ -23,11 +23,11 @@
                         <color key="tintColor" systemColor="systemGrayColor"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wv6-Ni-mji">
-                        <rect key="frame" x="132" y="184" width="78" height="31"/>
+                        <rect key="frame" x="159.33333333333334" y="195.66666666666666" width="60.666666666666657" height="24.333333333333343"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:15:34" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3B-eg-fru">
-                                <rect key="frame" x="5" y="5" width="68" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="5" y="5.0000000000000009" width="50.666666666666657" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -41,7 +41,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Big Beard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Q-0z-8dM">
-                        <rect key="frame" x="0.0" y="16.666666666666668" width="228" height="24.000000000000004"/>
+                        <rect key="frame" x="0.0" y="8" width="228" height="24"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -51,15 +51,16 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="z5Q-0z-8dM" secondAttribute="trailing" id="2kc-gp-WhL"/>
-                <constraint firstItem="Wv6-Ni-mji" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.75" id="62N-Ug-VGT"/>
                 <constraint firstAttribute="trailing" secondItem="EWE-yi-Gm5" secondAttribute="trailing" id="7im-Eg-cyc"/>
-                <constraint firstItem="z5Q-0z-8dM" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ClQ-EG-dw0"/>
+                <constraint firstItem="z5Q-0z-8dM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="945-kW-rWH"/>
+                <constraint firstAttribute="trailing" secondItem="z5Q-0z-8dM" secondAttribute="trailing" id="N5u-6Z-bcv"/>
+                <constraint firstItem="z5Q-0z-8dM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="TwI-Ae-8TC"/>
                 <constraint firstItem="EWE-yi-Gm5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XiZ-1y-2Ds"/>
                 <constraint firstItem="EWE-yi-Gm5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bQo-Ce-bp1"/>
                 <constraint firstAttribute="bottom" secondItem="EWE-yi-Gm5" secondAttribute="bottom" id="gQh-47-bcU"/>
+                <constraint firstAttribute="trailing" secondItem="Wv6-Ni-mji" secondAttribute="trailing" constant="8" id="gy4-gn-IyU"/>
                 <constraint firstItem="z5Q-0z-8dM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mzF-Lz-OqO"/>
-                <constraint firstItem="z5Q-0z-8dM" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.25" id="nnK-ui-rRW"/>
-                <constraint firstItem="Wv6-Ni-mji" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" multiplier="1.5" id="roa-Qe-Deb"/>
+                <constraint firstAttribute="bottom" secondItem="Wv6-Ni-mji" secondAttribute="bottom" constant="8" id="pKW-0x-Q0d"/>
             </constraints>
             <size key="customSize" width="228" height="207"/>
             <connections>
