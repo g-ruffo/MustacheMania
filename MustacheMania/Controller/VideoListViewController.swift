@@ -88,11 +88,8 @@ extension VideoListViewController: UICollectionViewDataSource {
                 cell.videoPreviewImage.contentMode = .scaleAspectFill
             }
         }
-        
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewFlowLayout

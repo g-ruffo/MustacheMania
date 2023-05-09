@@ -22,11 +22,16 @@
                         <rect key="frame" x="0.0" y="2.3333333333333286" width="228" height="223.33333333333337"/>
                         <color key="tintColor" systemColor="systemGrayColor"/>
                     </imageView>
+                    <view alpha="0.25" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r5b-3L-Hg6">
+                        <rect key="frame" x="-12" y="0.0" width="240" height="228"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" systemColor="labelColor"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wv6-Ni-mji">
                         <rect key="frame" x="159.33333333333334" y="195.66666666666666" width="60.666666666666657" height="24.333333333333343"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:15:34" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3B-eg-fru">
-                                <rect key="frame" x="5" y="5.0000000000000009" width="50.666666666666657" height="14.333333333333336"/>
+                                <rect key="frame" x="5" y="5.0000000000000009" width="50.666666666666664" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -69,11 +74,14 @@
                 <outlet property="tagLabel" destination="z5Q-0z-8dM" id="ADn-gc-S8C"/>
                 <outlet property="videoPreviewImage" destination="EWE-yi-Gm5" id="0no-El-nrs"/>
             </connections>
-            <point key="canvasLocation" x="204.58015267175571" y="42.605633802816904"/>
+            <point key="canvasLocation" x="204.58015267175571" y="42.253521126760567"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="questionmark.video.fill" catalog="system" width="128" height="81"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
