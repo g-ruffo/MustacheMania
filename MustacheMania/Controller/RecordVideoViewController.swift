@@ -38,10 +38,7 @@ class RecordVideoViewController: UIViewController {
     }
     
     private var mustacheNumber = 1 {
-        didSet {
-            if mustacheNumber > 5 { mustacheNumber =  1 }
-            
-        }
+        didSet { if mustacheNumber > 5 { mustacheNumber =  1 } }
     }
     
     private var currentMustache: SCNNode? {
@@ -77,9 +74,7 @@ class RecordVideoViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -114,10 +109,8 @@ class RecordVideoViewController: UIViewController {
         sceneView.session.add(anchor: anchor)
     }
     
-    @objc func didEnterBackground() {
-        // Stop recording when app enters background.
-        stopVideoRecording()
-    }
+    // Stop recording when app enters background.
+    @objc func didEnterBackground() { stopVideoRecording() }
     
     func createMustacheNode() -> SCNNode {
         let node = SCNNode()
@@ -132,7 +125,6 @@ class RecordVideoViewController: UIViewController {
         sphereGeometry.materials = [material]
         return sphereGeometry
     }
-    
     
     func checkUserVideoPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
