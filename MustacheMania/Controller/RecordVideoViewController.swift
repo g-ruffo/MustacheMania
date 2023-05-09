@@ -175,12 +175,12 @@ class RecordVideoViewController: UIViewController {
                 
             }
 
-            alertController.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { _ in
+            alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
                 guard let textField = alertController.textFields?.first else { return }
                 self.exportVideo(tag: textField.text ?? "", tempUrl)
             }))
             
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
             self.present(alertController, animated: true, completion: nil)
         }
@@ -228,7 +228,7 @@ class RecordVideoViewController: UIViewController {
             try data.write(to: url)
             let duration = AVURLAsset(url: url).duration.seconds
             let timestamp = manager.getTimestampFromSeconds(secondsDouble: duration)
-            self.coreDataService.createUpdateVideo(tag: tag, duration: timestamp, fileName: fileName)
+            self.coreDataService.createVideo(tag: tag, duration: timestamp, fileName: fileName)
             NotificationCenter.default.post(name: Notification.Name("Update"), object: nil)
              } catch {
                  print(error.localizedDescription)

@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class VideoListViewController: UIViewController {
 
@@ -40,11 +41,11 @@ class VideoListViewController: UIViewController {
         coreDataService.loadVideosFromDatabase()
     }
     
-    func fileInDocumentsDirectory(fileName: String) -> String? {
+    func fileInDocumentsDirectory(fileName: String) -> URL? {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         if let url = documentsURL {
             let fileURL = url.appendingPathComponent(fileName)
-            return fileURL.path
+            return fileURL
         }
             return nil
         }
@@ -62,11 +63,66 @@ class VideoListViewController: UIViewController {
 
         return nil
     }
+    
+    func editPlayAlert(atIndex index: Int) {
+        let video = savedVideos[index]
+    
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Edit or Play Video", message: nil, preferredStyle: .alert)
+            alertController.addTextField { field in
+                field.text = video.tag
+                field.returnKeyType = .done
+            }
+
+            alertController.addAction(UIAlertAction(title: "Play", style: .default, handler: { _ in
+                if let videoName = video.videoName {
+                    let videoPath = self.fileInDocumentsDirectory(fileName: videoName)
+                    if let url = videoPath {
+                        self.playVideo(atUrl: url)
+                    }
+                }
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+                guard let text = alertController.textFields?.first?.text else { return }
+                self.coreDataService.updateVideo(newTag: text, atIndex: index)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                if let videoName = video.videoName {
+                    let videoPath = self.fileInDocumentsDirectory(fileName: videoName)
+                    if let url = videoPath {
+                        do {
+                            try FileManager.default.removeItem(at: url)
+                            self.coreDataService.deleteVideo(atIndex: index)
+                        } catch {
+                            print("Error deleting video = \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }))
+
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func playVideo(atUrl url: URL) {
+        let player = AVPlayer(url: url)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
 extension VideoListViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        editPlayAlert(atIndex: indexPath.row)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -81,13 +137,13 @@ extension VideoListViewController: UICollectionViewDataSource {
         cell.durationLabel.text = "\(video.duration ?? "")"
         cell.tagLabel.text = video.tag
         if let fileName = video.videoName {
-            let destinationPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-            let videoPath = destinationPath?.appendingPathComponent(fileName)
-            if let path = videoPath {
-                cell.videoPreviewImage.image = getThumbnailImage(forUrl: path)
+            let videoPath = fileInDocumentsDirectory(fileName: fileName)
+            if let url = videoPath {
+                cell.videoPreviewImage.image = getThumbnailImage(forUrl: url)
                 cell.videoPreviewImage.contentMode = .scaleAspectFill
             }
         }
+        cell.layer.cornerRadius = 10
         return cell
     }
 }
