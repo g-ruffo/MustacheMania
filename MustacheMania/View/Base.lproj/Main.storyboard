@@ -22,7 +22,7 @@
                     </tabBar>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="tabBarHeight">
-                            <real key="value" value="64"/>
+                            <real key="value" value="58"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="tabBarCornerRadius">
                             <real key="value" value="20"/>
@@ -43,6 +43,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="moZ-Qb-aaE">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="4" id="GJo-xE-BV8">
                                     <size key="itemSize" width="228" height="228"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -53,7 +54,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mAe-7U-Wdm"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="moZ-Qb-aaE" firstAttribute="leading" secondItem="mAe-7U-Wdm" secondAttribute="leading" id="KfD-wj-MgK"/>
                             <constraint firstItem="moZ-Qb-aaE" firstAttribute="top" secondItem="mAe-7U-Wdm" secondAttribute="top" id="L0o-A7-ShV"/>
@@ -237,9 +238,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
