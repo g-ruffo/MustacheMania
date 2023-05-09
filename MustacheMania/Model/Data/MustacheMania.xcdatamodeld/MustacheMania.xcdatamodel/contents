@@ -3,6 +3,6 @@
     <entity name="RecordedVideoItem" representedClassName="RecordedVideoItem" syncable="YES" codeGenerationType="class">
         <attribute name="duration" optional="YES" attributeType="String"/>
         <attribute name="tag" optional="YES" attributeType="String"/>
-        <attribute name="video" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="videoName" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
     </entity>
 </model>

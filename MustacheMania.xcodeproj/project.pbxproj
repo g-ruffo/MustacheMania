@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B8AF55C375249F48E5C9462 /* Pods_MustacheMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E077D61C1AEC9F80B40DAEBF /* Pods_MustacheMania.framework */; };
+		79635366BA077D4C92777D30 /* Pods_MustacheMania_MustacheManiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD0D31A7BAED83E6E1161D4 /* Pods_MustacheMania_MustacheManiaUITests.framework */; };
+		796995172A09D8DE002A8502 /* RecordVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796995162A09D8DE002A8502 /* RecordVideoManager.swift */; };
 		796ACD012A0486B5009B03FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD002A0486B5009B03FA /* AppDelegate.swift */; };
 		796ACD032A0486B5009B03FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD022A0486B5009B03FA /* SceneDelegate.swift */; };
 		796ACD082A0486B5009B03FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 796ACD062A0486B5009B03FA /* Main.storyboard */; };
@@ -23,6 +26,7 @@
 		796ACD4A2A04D604009B03FA /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD482A04D604009B03FA /* VideoCell.swift */; };
 		796ACD4B2A04D604009B03FA /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796ACD492A04D604009B03FA /* VideoCell.xib */; };
 		796ACD4D2A04DC43009B03FA /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796ACD4C2A04DC43009B03FA /* CoreDataService.swift */; };
+		CE6A81564BE635137373EF43 /* Pods_MustacheManiaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEFC1C01AEB5D63B365F8B8 /* Pods_MustacheManiaTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		141CB084AB4A406B0433A460 /* Pods-MustacheMania-MustacheManiaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheMania-MustacheManiaUITests.release.xcconfig"; path = "Target Support Files/Pods-MustacheMania-MustacheManiaUITests/Pods-MustacheMania-MustacheManiaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3A652E05DBA58D1CD840B466 /* Pods-MustacheMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheMania.debug.xcconfig"; path = "Target Support Files/Pods-MustacheMania/Pods-MustacheMania.debug.xcconfig"; sourceTree = "<group>"; };
+		48A41D0319399E8239BAFD89 /* Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MustacheMania-MustacheManiaUITests/Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6E332FDFD8D67BFCF1C674F6 /* Pods-MustacheManiaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheManiaTests.release.xcconfig"; path = "Target Support Files/Pods-MustacheManiaTests/Pods-MustacheManiaTests.release.xcconfig"; sourceTree = "<group>"; };
+		796995162A09D8DE002A8502 /* RecordVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoManager.swift; sourceTree = "<group>"; };
 		796ACCFD2A0486B5009B03FA /* MustacheMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MustacheMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		796ACD002A0486B5009B03FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		796ACD022A0486B5009B03FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +72,11 @@
 		796ACD482A04D604009B03FA /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		796ACD492A04D604009B03FA /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		796ACD4C2A04DC43009B03FA /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		ADEFC1C01AEB5D63B365F8B8 /* Pods_MustacheManiaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MustacheManiaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFBCB22AFD7A28F45CA13D52 /* Pods-MustacheMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheMania.release.xcconfig"; path = "Target Support Files/Pods-MustacheMania/Pods-MustacheMania.release.xcconfig"; sourceTree = "<group>"; };
+		E077D61C1AEC9F80B40DAEBF /* Pods_MustacheMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MustacheMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFD0D31A7BAED83E6E1161D4 /* Pods_MustacheMania_MustacheManiaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MustacheMania_MustacheManiaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F219F389791F379F04565B89 /* Pods-MustacheManiaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MustacheManiaTests.debug.xcconfig"; path = "Target Support Files/Pods-MustacheManiaTests/Pods-MustacheManiaTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B8AF55C375249F48E5C9462 /* Pods_MustacheMania.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6A81564BE635137373EF43 /* Pods_MustacheManiaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,12 +100,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79635366BA077D4C92777D30 /* Pods_MustacheMania_MustacheManiaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27D5A4E7816B8674E724E350 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3A652E05DBA58D1CD840B466 /* Pods-MustacheMania.debug.xcconfig */,
+				BFBCB22AFD7A28F45CA13D52 /* Pods-MustacheMania.release.xcconfig */,
+				48A41D0319399E8239BAFD89 /* Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig */,
+				141CB084AB4A406B0433A460 /* Pods-MustacheMania-MustacheManiaUITests.release.xcconfig */,
+				F219F389791F379F04565B89 /* Pods-MustacheManiaTests.debug.xcconfig */,
+				6E332FDFD8D67BFCF1C674F6 /* Pods-MustacheManiaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		2C37F8CB136721B4FF433AC6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E077D61C1AEC9F80B40DAEBF /* Pods_MustacheMania.framework */,
+				EFD0D31A7BAED83E6E1161D4 /* Pods_MustacheMania_MustacheManiaUITests.framework */,
+				ADEFC1C01AEB5D63B365F8B8 /* Pods_MustacheManiaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		796ACCF42A0486B5009B03FA = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +137,8 @@
 				796ACD192A0486B6009B03FA /* MustacheManiaTests */,
 				796ACD232A0486B6009B03FA /* MustacheManiaUITests */,
 				796ACCFE2A0486B5009B03FA /* Products */,
+				27D5A4E7816B8674E724E350 /* Pods */,
+				2C37F8CB136721B4FF433AC6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +190,7 @@
 			children = (
 				796ACD362A048B60009B03FA /* Data */,
 				796ACD4C2A04DC43009B03FA /* CoreDataService.swift */,
+				796995162A09D8DE002A8502 /* RecordVideoManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,9 +238,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 796ACD2A2A0486B6009B03FA /* Build configuration list for PBXNativeTarget "MustacheMania" */;
 			buildPhases = (
+				B32A0B8A8513BC36DF0AAA07 /* [CP] Check Pods Manifest.lock */,
 				796ACCF92A0486B5009B03FA /* Sources */,
 				796ACCFA2A0486B5009B03FA /* Frameworks */,
 				796ACCFB2A0486B5009B03FA /* Resources */,
+				D796CADBF831BB1C56E36FBF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,6 +257,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 796ACD2D2A0486B6009B03FA /* Build configuration list for PBXNativeTarget "MustacheManiaTests" */;
 			buildPhases = (
+				5239859C7FCC520544ED2419 /* [CP] Check Pods Manifest.lock */,
 				796ACD122A0486B6009B03FA /* Sources */,
 				796ACD132A0486B6009B03FA /* Frameworks */,
 				796ACD142A0486B6009B03FA /* Resources */,
@@ -230,9 +276,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 796ACD302A0486B6009B03FA /* Build configuration list for PBXNativeTarget "MustacheManiaUITests" */;
 			buildPhases = (
+				2FBE8A86DDCCD19546B0B543 /* [CP] Check Pods Manifest.lock */,
 				796ACD1C2A0486B6009B03FA /* Sources */,
 				796ACD1D2A0486B6009B03FA /* Frameworks */,
 				796ACD1E2A0486B6009B03FA /* Resources */,
+				3F48FD480883E7AD835D7731 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -315,6 +363,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2FBE8A86DDCCD19546B0B543 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MustacheMania-MustacheManiaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F48FD480883E7AD835D7731 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MustacheMania-MustacheManiaUITests/Pods-MustacheMania-MustacheManiaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MustacheMania-MustacheManiaUITests/Pods-MustacheMania-MustacheManiaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MustacheMania-MustacheManiaUITests/Pods-MustacheMania-MustacheManiaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5239859C7FCC520544ED2419 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MustacheManiaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B32A0B8A8513BC36DF0AAA07 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MustacheMania-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D796CADBF831BB1C56E36FBF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MustacheMania/Pods-MustacheMania-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MustacheMania/Pods-MustacheMania-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MustacheMania/Pods-MustacheMania-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		796ACCF92A0486B5009B03FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -326,6 +477,7 @@
 				796ACD012A0486B5009B03FA /* AppDelegate.swift in Sources */,
 				796ACD3F2A048EA2009B03FA /* RecordVideoViewController.swift in Sources */,
 				796ACD412A049350009B03FA /* TabBarController.swift in Sources */,
+				796995172A09D8DE002A8502 /* RecordVideoManager.swift in Sources */,
 				796ACD0B2A0486B5009B03FA /* MustacheMania.xcdatamodeld in Sources */,
 				796ACD4D2A04DC43009B03FA /* CoreDataService.swift in Sources */,
 				796ACD032A0486B5009B03FA /* SceneDelegate.swift in Sources */,
@@ -434,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -488,7 +640,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -500,6 +652,7 @@
 		};
 		796ACD2B2A0486B6009B03FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A652E05DBA58D1CD840B466 /* Pods-MustacheMania.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -528,6 +681,7 @@
 		};
 		796ACD2C2A0486B6009B03FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFBCB22AFD7A28F45CA13D52 /* Pods-MustacheMania.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -556,6 +710,7 @@
 		};
 		796ACD2E2A0486B6009B03FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F219F389791F379F04565B89 /* Pods-MustacheManiaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -576,6 +731,7 @@
 		};
 		796ACD2F2A0486B6009B03FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E332FDFD8D67BFCF1C674F6 /* Pods-MustacheManiaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -596,6 +752,7 @@
 		};
 		796ACD312A0486B6009B03FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48A41D0319399E8239BAFD89 /* Pods-MustacheMania-MustacheManiaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -614,6 +771,7 @@
 		};
 		796ACD322A0486B6009B03FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 141CB084AB4A406B0433A460 /* Pods-MustacheMania-MustacheManiaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

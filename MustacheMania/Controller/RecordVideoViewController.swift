@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import AVFoundation
-import RealityKit
+import SpriteKit
+import ARKit
+import ARVideoKit
 
 class RecordVideoViewController: UIViewController {
     
@@ -15,26 +16,108 @@ class RecordVideoViewController: UIViewController {
     @IBOutlet weak var durationViewContainer: UIView!
     @IBOutlet weak var durationImageView: UIImageView!
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var switchCameraMenuButton: UIBarButtonItem!
-    @IBOutlet weak var arView: ARView!
+    @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var clickScreenLabel: UILabel!
+    @IBOutlet weak var mustacheButton: UIButton!
     
     private var captureSession: AVCaptureSession?
     private let videoOutput = AVCaptureMovieFileOutput()
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     private var captureDevice: AVCaptureDevice?
-    private var isUsingFrontCamera = true
+    private var recorder: RecordAR?
+    private var timer: Timer?
+    private var toggleDurationImage = true
+    private var counter: Double = 0.0 {
+        didSet {
+            DispatchQueue.main.async { 
+                self.durationLabel.text = self.manager.getTimestampFromSeconds(secondsDouble: self.counter)
+                self.durationImageView.alpha = self.toggleDurationImage ? 1 : 0
+                self.toggleDurationImage.toggle()
+            }
+        }
+    }
     
+    private var mustacheNumber = 1 {
+        didSet {
+            if mustacheNumber > 5 { mustacheNumber =  1 }
+            
+        }
+    }
+    
+    private var currentMustache: SCNNode? {
+        didSet {
+            DispatchQueue.main.async {
+                if let _ = self.currentMustache {
+                    self.clickScreenLabel.alpha = 0 }
+                else { self.clickScreenLabel.alpha = 1 }
+            }
+        }
+    }
+
     private var coreDataService = CoreDataService()
+    private let manager = RecordVideoManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set CoreDataService delegate.
-        coreDataService.delegate = self
-        
+        // Set SceneView delegate.
+        sceneView.delegate = self
+        recorder = RecordAR(ARSceneKit: sceneView)
+        // Set RecordAR delegate.
+        recorder?.delegate = self
+        recorder?.deleteCacheWhenExported = true
+        recorder?.onlyRenderWhileRecording = true
         // Setup recording duration views
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
+        mustacheButton.layer.cornerRadius = 20
+
+        
+        addTapGestureToSceneView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Create a session configuration
+        let configuration = ARWorldTrackingConfiguration()
+        recorder?.prepare(configuration)
+        
+        // Run the view's session
+        sceneView.session.run(configuration)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        recorder?.rest()
+        currentMustache?.removeFromParentNode()
+        currentMustache = nil
+        // Pause the view's session
+        sceneView.session.pause()
+    }
+    
+    func addTapGestureToSceneView() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didReceiveTapGesture(_:)))
+        sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc func didReceiveTapGesture(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: sceneView)
+        guard let hitTestResult = sceneView.hitTest(location, types: [.featurePoint, .estimatedHorizontalPlane]).first
+            else { return }
+        let anchor = ARAnchor(transform: hitTestResult.worldTransform)
+        sceneView.session.add(anchor: anchor)
+    }
+    
+    func createMustacheNode() -> SCNNode {
+        let sphereGeometry = SCNSphere(radius: 0.2)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "mustache\(mustacheNumber)")
+        sphereGeometry.materials = [material]
+
+        let node = SCNNode()
+        node.geometry = sphereGeometry
+        return node
+    }
+
     
     func checkUserPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -45,20 +128,19 @@ class RecordVideoViewController: UIViewController {
                     self?.showAlertDialog()
                     return
                 }
-                DispatchQueue.main.async {
-                    self?.setupCamera()
-                }
-
+                self?.setupCamera(hasPermissions: true)
             }
         case .restricted:
             print("Camera Permissions Restricted")
+            setupCamera(hasPermissions: false)
             break
         case .denied:
             showAlertDialog()
+            setupCamera(hasPermissions: false)
             break
             // User has previously granted permissions.
         case .authorized:
-            setupCamera()
+            setupCamera(hasPermissions: true)
         @unknown default:
             break
         }
@@ -81,98 +163,90 @@ class RecordVideoViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
     
-    func setupCamera() {
-        // Create the capture session.
-        let captureSession = AVCaptureSession()
-        
-        // Find the default video device.
-        guard let videoDevice = AVCaptureDevice.default(for: .video) else { return }
-        
-        
-        captureDevice = videoDevice
+    func showSaveDialog(tempUrl: URL) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Add Tag to Video", message: nil, preferredStyle: .alert)
+            alertController.addTextField { field in
+                field.placeholder = "Enter Tag"
+                field.returnKeyType = .done
+                
+            }
 
-        do {
-            // Wrap the video device in a capture device input.
-            let videoInput = try AVCaptureDeviceInput(device: videoDevice)
-            // If the input can be added, add it to the session.
-            if captureSession.canAddInput(videoInput) {
-                captureSession.addInput(videoInput)
-            }
-            if captureSession.canAddOutput(videoOutput) {
-                captureSession.addOutput(videoOutput)
-            }
+            alertController.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { _ in
+                guard let textField = alertController.textFields?.first else { return }
+                self.exportVideo(tag: textField.text ?? "", tempUrl)
+            }))
             
-            captureSession.sessionPreset = .high
-//            // Set the preview layers session.
-//            videoPreviewLayer.session = captureSession
-//            videoPreviewLayer.videoGravity = .resizeAspectFill
-            // Start session.
-            captureSession.startRunning()
-            setupARView()
-            // Set session as global variable.
-            self.captureSession = captureSession
-            
-        } catch {
-            // Configuration failed. Handle error.
-            print("Error configuring camera = \(error.localizedDescription)")
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+
+            self.present(alertController, animated: true, completion: nil)
         }
     }
+
     
-    func setupARView() {
-         let anchor = AnchorEntity(plane: .horizontal, minimumBounds:[0.2, 0.2])
-         arView.scene.addAnchor(anchor)
-        var mustaches: [Entity] = []
-        for _ in 1...4 {
-            let box = MeshResource.generateBox(width: 0.04, height: 0.002, depth: 0.04)
-            let metalMaterial = SimpleMaterial(color: .gray, isMetallic: true)
-            let model = ModelEntity(mesh: box, materials: [metalMaterial])
-            
-            model.generateCollisionShapes(recursive: true)
-            mustaches.append(model)
-        }
-        
-        for (index, mustache) in mustaches.enumerated() {
-            let x = Float(index % 2)
-            let z = Float(index / 2)
-            mustache.position = [x * 0.1, 0 , z * 0.1]
-            anchor.addChild(mustache)
-        }
-     }
+    func setupCamera(hasPermissions: Bool) {
+        recordButton.isEnabled = hasPermissions
+        mustacheButton.isEnabled = hasPermissions
+        clickScreenLabel.text = hasPermissions ? "Click screen to set mustache!" : "Camera Permissions Required"
+    }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
-        if videoOutput.isRecording { videoOutput.stopRecording() }
-        else {
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        if recorder?.status == .recording {
+            recorder?.stop()
+            timer?.invalidate()
+            timer = nil
+            self.recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
+            self.durationViewContainer.alpha = 0
+        } else {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCounterChanged), userInfo: nil, repeats: true)
+            recorder?.record()
+            counter = 0.0
+            self.recordButton.setImage(UIImage(systemName: "stop"), for: .normal)
+            self.durationViewContainer.alpha = 1
 
-            let fileUrl = paths[0].appendingPathComponent("output.mov")
-
-            try? FileManager.default.removeItem(at: fileUrl)
-
-            videoOutput.startRecording(to: fileUrl, recordingDelegate: self as AVCaptureFileOutputRecordingDelegate)
         }
-        
-            let buttonImage = self.videoOutput.isRecording ? UIImage(systemName: "record.circle") : UIImage(systemName: "stop")
-            self.recordButton.setImage(buttonImage, for: .normal)
-            self.durationViewContainer.alpha = self.videoOutput.isRecording ? 0 : 1
-            self.switchCameraMenuButton.isEnabled = self.videoOutput.isRecording
     }
     
-    @IBAction func changeCameraButtonPressed(_ sender: UIBarButtonItem) {
-        print("Switch Camera Pressed")
+    @objc func timeCounterChanged() { self.counter += 1 }
+    
+    func exportVideo(tag: String, _ tempUrl: URL) {
+        let fileName = "\(Date().timeIntervalSince1970).mp4"
+        let destinationPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        guard let path = destinationPath else { return }
+        let url = path.appendingPathComponent(fileName)
+        do {
+            let data = try Data(contentsOf: tempUrl)
+            try data.write(to: url)
+            let duration = AVURLAsset(url: url).duration.seconds
+            let timestamp = manager.getTimestampFromSeconds(secondsDouble: duration)
+            self.coreDataService.createUpdateVideo(tag: tag, duration: timestamp, fileName: fileName)
+            NotificationCenter.default.post(name: Notification.Name("Update"), object: nil)
+             } catch {
+                 print(error.localizedDescription)
+             }
     }
     
 }
 
-// MARK: - CoreDataServiceDelegate
-extension RecordVideoViewController: CoreDataServiceDelegate {
-
+// MARK: - ARSCNViewDelegate
+extension RecordVideoViewController: ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard !(anchor is ARPlaneAnchor) else { return }
+        currentMustache?.removeFromParentNode()
+        currentMustache = createMustacheNode()
+        guard let _ = currentMustache else { return }
+        DispatchQueue.main.async {
+            node.addChildNode(self.currentMustache!)
+        }
+    }
 }
 
-// MARK: - AVCaptureFileOutputRecordingDelegate
-extension RecordVideoViewController: AVCaptureFileOutputRecordingDelegate {
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        print("Finished Recording")
+// MARK: - RecordARDelegate
+extension RecordVideoViewController: RecordARDelegate {
+    func recorder(didEndRecording path: URL, with noError: Bool) {
+        if noError { showSaveDialog(tempUrl: path)  }
     }
+    func recorder(didFailRecording error: Error?, and status: String) { }
+    func recorder(willEnterBackground status: ARVideoKit.RecordARStatus) { }
 }

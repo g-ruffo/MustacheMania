@@ -20,8 +20,6 @@ class CoreDataService {
     private var savedVideos: [RecordedVideoItem] = [] {
         didSet { delegate?.videosHaveLoaded(self, loadedVideos: savedVideos)}
     }
-    private var currentVideo: RecordedVideoItem?
-
     private let databaseContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var delegate: CoreDataServiceDelegate?
@@ -36,25 +34,17 @@ class CoreDataService {
     }
     
     //MARK: - Create Video Methods
-    func createUpdateVideo(tag: String, duration: String, videoData: Data) {
-        let video = currentVideo ?? RecordedVideoItem(context: databaseContext)
+    func createUpdateVideo(tag: String, duration: String, fileName: String) {
+        let video = RecordedVideoItem(context: databaseContext)
         video.tag = tag
         video.duration = duration
-        video.video = videoData
+        video.videoName = fileName
         saveToDatabase()
-        
-    }
-    
-    //MARK: - Delete Video Methods
-    func deleteVideo() {
-        if let video = currentVideo {
-            databaseContext.delete(video)
-            return saveToDatabase()
-        }
     }
     
     //MARK: - Get Video Methods
-    func loadVideosFromDatabase(withRequest request : NSFetchRequest<RecordedVideoItem>) {
+    func loadVideosFromDatabase() {
+        let request: NSFetchRequest<RecordedVideoItem> = RecordedVideoItem.fetchRequest()
         do{
             savedVideos = try databaseContext.fetch(request)
         } catch {
