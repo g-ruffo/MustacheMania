@@ -70,7 +70,6 @@ class RecordVideoViewController: UIViewController {
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
         mustacheButton.layer.cornerRadius = 20
-
         
         addTapGestureToSceneView()
     }
@@ -80,7 +79,7 @@ class RecordVideoViewController: UIViewController {
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         recorder?.prepare(configuration)
-        
+        checkUserPermissions()
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -101,21 +100,24 @@ class RecordVideoViewController: UIViewController {
 
     @objc func didReceiveTapGesture(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
-        guard let hitTestResult = sceneView.hitTest(location, types: [.featurePoint, .estimatedHorizontalPlane]).first
+        guard let hitTestResult = sceneView.hitTest(location, types: [.featurePoint]).first
             else { return }
         let anchor = ARAnchor(transform: hitTestResult.worldTransform)
         sceneView.session.add(anchor: anchor)
     }
     
     func createMustacheNode() -> SCNNode {
+        let node = SCNNode()
+        node.geometry = createGeometry()
+        return node
+    }
+    
+    func createGeometry() -> SCNGeometry {
         let sphereGeometry = SCNSphere(radius: 0.2)
         let material = SCNMaterial()
         material.diffuse.contents = UIImage(named: "mustache\(mustacheNumber)")
         sphereGeometry.materials = [material]
-
-        let node = SCNNode()
-        node.geometry = sphereGeometry
-        return node
+        return sphereGeometry
     }
 
     
@@ -189,6 +191,12 @@ class RecordVideoViewController: UIViewController {
         recordButton.isEnabled = hasPermissions
         mustacheButton.isEnabled = hasPermissions
         clickScreenLabel.text = hasPermissions ? "Click screen to set mustache!" : "Camera Permissions Required"
+    }
+    
+    @IBAction func mustacheButtonPressed(_ sender: UIButton) {
+        mustacheNumber += 1
+        mustacheButton.setImage(UIImage(named: "mustache\(mustacheNumber)"), for: .normal)
+        if let _ = currentMustache { currentMustache?.geometry = createGeometry() }
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
