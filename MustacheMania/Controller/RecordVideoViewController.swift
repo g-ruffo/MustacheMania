@@ -17,16 +17,37 @@ class RecordVideoViewController: UIViewController {
     @IBOutlet weak var durationImageView: UIImageView!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var sceneView: ARSCNView!
-    
+    @IBOutlet weak var clickScreenLabel: UILabel!
+
     private var captureSession: AVCaptureSession?
     private let videoOutput = AVCaptureMovieFileOutput()
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
     private var captureDevice: AVCaptureDevice?
-    private var isUsingFrontCamera = true
-    private var recorder:RecordAR?
-    private var currentMustache: SCNNode?
+    private var recorder: RecordAR?
+    private var timer: Timer?
+    private var toggleDurationImage = true
+    private var counter: Double = 0.0 {
+        didSet {
+            DispatchQueue.main.async { 
+                self.durationLabel.text = self.manager.getTimestampFromSeconds(secondsDouble: self.counter)
+                self.durationImageView.alpha = self.toggleDurationImage ? 1 : 0
+                self.toggleDurationImage.toggle()
+            }
+        }
+    }
+    
+    private var currentMustache: SCNNode? {
+        didSet {
+            DispatchQueue.main.async {
+                if let _ = self.currentMustache {
+                    self.clickScreenLabel.alpha = 0 }
+                else { self.clickScreenLabel.alpha = 1 }
+            }
+        }
+    }
 
     private var coreDataService = CoreDataService()
+    private let manager = RecordVideoManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +55,12 @@ class RecordVideoViewController: UIViewController {
         coreDataService.delegate = self
         sceneView.delegate = self
         recorder = RecordAR(ARSceneKit: sceneView)
+        recorder?.delegate = self
 
         // Setup recording duration views
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
         addTapGestureToSceneView()
-    }
-    
-    func addTapGestureToSceneView() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didReceiveTapGesture(_:)))
-        sceneView.addGestureRecognizer(tapGestureRecognizer)
-    }
-
-    @objc func didReceiveTapGesture(_ sender: UITapGestureRecognizer) {
-        let location = sender.location(in: sceneView)
-        guard let hitTestResult = sceneView.hitTest(location, types: [.featurePoint, .estimatedHorizontalPlane]).first
-            else { return }
-        let anchor = ARAnchor(transform: hitTestResult.worldTransform)
-        sceneView.session.add(anchor: anchor)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,14 +76,29 @@ class RecordVideoViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         recorder?.rest()
+        currentMustache?.removeFromParentNode()
+        currentMustache = nil
         // Pause the view's session
         sceneView.session.pause()
+    }
+    
+    func addTapGestureToSceneView() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didReceiveTapGesture(_:)))
+        sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc func didReceiveTapGesture(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: sceneView)
+        guard let hitTestResult = sceneView.hitTest(location, types: [.featurePoint, .estimatedHorizontalPlane]).first
+            else { return }
+        let anchor = ARAnchor(transform: hitTestResult.worldTransform)
+        sceneView.session.add(anchor: anchor)
     }
     
     func generateSphereNode() -> SCNNode {
         let planeGeometry = SCNPlane(width: 0.1, height: 0.2)
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "mustache3")
+        material.diffuse.contents = UIImage(named: "mustache1")
         planeGeometry.materials = [material]
 
         let node = SCNNode()
@@ -128,6 +152,26 @@ class RecordVideoViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    func showSaveDialog(tempUrl: URL) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Add Tag to Video", message: nil, preferredStyle: .alert)
+            alertController.addTextField { field in
+                field.placeholder = "Enter Tag"
+                field.returnKeyType = .done
+                
+            }
+
+            alertController.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { _ in
+                guard let textField = alertController.textFields?.first else { return }
+                self.exportVideo(tag: textField.text ?? "", tempUrl)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 
     
     func setupCamera() {
@@ -137,32 +181,39 @@ class RecordVideoViewController: UIViewController {
     @IBAction func recordButtonPressed(_ sender: UIButton) {
         if recorder?.status == .recording {
             recorder?.stop()
-            let url = getDocumentsDirectory().appendingPathComponent("\(Date()).mp4")
-  
-            self.recordButton.setImage(UIImage(systemName: "stop"), for: .normal)
+            timer?.invalidate()
+            timer = nil
+            self.recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
             self.durationViewContainer.alpha = 0
         } else {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCounterChanged), userInfo: nil, repeats: true)
             recorder?.record()
-            self.recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
+            counter = 0.0
+            self.recordButton.setImage(UIImage(systemName: "stop"), for: .normal)
             self.durationViewContainer.alpha = 1
 
         }
     }
     
-    func exportVideo(url: URL) {
-        recorder?.export(video: url) { exported , _ in
-            if exported {
-                
-            }
-        }
+    @objc func timeCounterChanged() -> Void {
+                self.counter += 1
     }
     
-    func getDocumentsDirectory() -> URL {
-        // find all possible documents directories for this user
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-
-        // just send back the first one, which ought to be the only one
-        return paths[0]
+    func exportVideo(tag: String, _ tempUrl: URL) {
+        let fileName = "\(Date().timeIntervalSince1970).mp4"
+        let destinationPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        guard let path = destinationPath else { return }
+        let url = path.appendingPathComponent(fileName)
+        do {
+            let data = try Data(contentsOf: tempUrl)
+            try data.write(to: url)
+            let duration = AVURLAsset(url: url).duration.seconds
+            let timestamp = manager.getTimestampFromSeconds(secondsDouble: duration)
+            self.coreDataService.createUpdateVideo(tag: tag, duration: timestamp, fileName: fileName)
+            NotificationCenter.default.post(name: Notification.Name("Update"), object: nil)
+             } catch {
+                 print(error.localizedDescription)
+             }
     }
     
 }
@@ -181,5 +232,21 @@ extension RecordVideoViewController: ARSCNViewDelegate {
         DispatchQueue.main.async {
             node.addChildNode(self.currentMustache!)
         }
+    }
+}
+
+// MARK: - RecordARDelegate
+extension RecordVideoViewController: RecordARDelegate {
+    func recorder(didEndRecording path: URL, with noError: Bool) {
+        if noError {
+            showSaveDialog(tempUrl: path)
+        }
+    }
+    
+    func recorder(didFailRecording error: Error?, and status: String) {
+    }
+    
+    func recorder(willEnterBackground status: ARVideoKit.RecordARStatus) {
+        
     }
 }
