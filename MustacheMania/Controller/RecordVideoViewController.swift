@@ -18,7 +18,8 @@ class RecordVideoViewController: UIViewController {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var clickScreenLabel: UILabel!
-
+    @IBOutlet weak var mustacheButton: UIButton!
+    
     private var captureSession: AVCaptureSession?
     private let videoOutput = AVCaptureMovieFileOutput()
     private let videoPreviewLayer = AVCaptureVideoPreviewLayer()
@@ -33,6 +34,13 @@ class RecordVideoViewController: UIViewController {
                 self.durationImageView.alpha = self.toggleDurationImage ? 1 : 0
                 self.toggleDurationImage.toggle()
             }
+        }
+    }
+    
+    private var mustacheNumber = 1 {
+        didSet {
+            if mustacheNumber > 5 { mustacheNumber =  1 }
+            
         }
     }
     
@@ -51,15 +59,19 @@ class RecordVideoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set CoreDataService delegate.
-        coreDataService.delegate = self
+        // Set SceneView delegate.
         sceneView.delegate = self
         recorder = RecordAR(ARSceneKit: sceneView)
+        // Set RecordAR delegate.
         recorder?.delegate = self
-
+        recorder?.deleteCacheWhenExported = true
+        recorder?.onlyRenderWhileRecording = true
         // Setup recording duration views
         durationViewContainer.layer.cornerRadius = durationViewContainer.frame.height / 2
         durationViewContainer.alpha = 0
+        mustacheButton.layer.cornerRadius = 20
+
+        
         addTapGestureToSceneView()
     }
     
@@ -95,14 +107,14 @@ class RecordVideoViewController: UIViewController {
         sceneView.session.add(anchor: anchor)
     }
     
-    func generateSphereNode() -> SCNNode {
-        let planeGeometry = SCNPlane(width: 0.1, height: 0.2)
+    func createMustacheNode() -> SCNNode {
+        let sphereGeometry = SCNSphere(radius: 0.2)
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "mustache1")
-        planeGeometry.materials = [material]
+        material.diffuse.contents = UIImage(named: "mustache\(mustacheNumber)")
+        sphereGeometry.materials = [material]
 
         let node = SCNNode()
-        node.geometry = planeGeometry
+        node.geometry = sphereGeometry
         return node
     }
 
@@ -116,20 +128,19 @@ class RecordVideoViewController: UIViewController {
                     self?.showAlertDialog()
                     return
                 }
-                DispatchQueue.main.async {
-                    self?.setupCamera()
-                }
-
+                self?.setupCamera(hasPermissions: true)
             }
         case .restricted:
             print("Camera Permissions Restricted")
+            setupCamera(hasPermissions: false)
             break
         case .denied:
             showAlertDialog()
+            setupCamera(hasPermissions: false)
             break
             // User has previously granted permissions.
         case .authorized:
-            setupCamera()
+            setupCamera(hasPermissions: true)
         @unknown default:
             break
         }
@@ -174,8 +185,10 @@ class RecordVideoViewController: UIViewController {
     }
 
     
-    func setupCamera() {
-
+    func setupCamera(hasPermissions: Bool) {
+        recordButton.isEnabled = hasPermissions
+        mustacheButton.isEnabled = hasPermissions
+        clickScreenLabel.text = hasPermissions ? "Click screen to set mustache!" : "Camera Permissions Required"
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
@@ -195,9 +208,7 @@ class RecordVideoViewController: UIViewController {
         }
     }
     
-    @objc func timeCounterChanged() -> Void {
-                self.counter += 1
-    }
+    @objc func timeCounterChanged() { self.counter += 1 }
     
     func exportVideo(tag: String, _ tempUrl: URL) {
         let fileName = "\(Date().timeIntervalSince1970).mp4"
@@ -218,17 +229,13 @@ class RecordVideoViewController: UIViewController {
     
 }
 
-// MARK: - CoreDataServiceDelegate
-extension RecordVideoViewController: CoreDataServiceDelegate {
-
-}
-
 // MARK: - ARSCNViewDelegate
 extension RecordVideoViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard !(anchor is ARPlaneAnchor) else { return }
         currentMustache?.removeFromParentNode()
-        currentMustache = generateSphereNode()
+        currentMustache = createMustacheNode()
+        guard let _ = currentMustache else { return }
         DispatchQueue.main.async {
             node.addChildNode(self.currentMustache!)
         }
@@ -238,15 +245,8 @@ extension RecordVideoViewController: ARSCNViewDelegate {
 // MARK: - RecordARDelegate
 extension RecordVideoViewController: RecordARDelegate {
     func recorder(didEndRecording path: URL, with noError: Bool) {
-        if noError {
-            showSaveDialog(tempUrl: path)
-        }
+        if noError { showSaveDialog(tempUrl: path)  }
     }
-    
-    func recorder(didFailRecording error: Error?, and status: String) {
-    }
-    
-    func recorder(willEnterBackground status: ARVideoKit.RecordARStatus) {
-        
-    }
+    func recorder(didFailRecording error: Error?, and status: String) { }
+    func recorder(willEnterBackground status: ARVideoKit.RecordARStatus) { }
 }
