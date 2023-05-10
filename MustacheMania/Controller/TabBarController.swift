@@ -56,6 +56,7 @@ class TabBarController: UITabBarController {
               imageView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
           }) { _ in
               UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 3.0, options: .curveEaseInOut, animations: {
+                  // Reset icon position.
                   imageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
               }, completion: nil)
           }
@@ -66,10 +67,14 @@ extension TabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         // Set the tab bar item color.
         if viewController.restorationIdentifier == K.Navigation.recordVideoNav {
+            // Change the record icon to red.
             self.tabBar.tintColor = .red
+            // Animate icon.
             animate(recordVideoTabView)
         } else {
+            // Change the video list icon to blue.
             self.tabBar.tintColor = .systemBlue
+            // Animate icon.
             animate(videoListTabView)
         }
     }
