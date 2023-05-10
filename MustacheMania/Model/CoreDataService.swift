@@ -22,7 +22,7 @@ class CoreDataService {
     
     var delegate: CoreDataServiceDelegate?
     
-    //MARK: - Save Method
+    // MARK: - Save Method
     func saveToDatabase() {
         do {
             try databaseContext.save()
@@ -31,7 +31,7 @@ class CoreDataService {
         }
     }
     
-    //MARK: - Create Video Method
+    // MARK: - Create Video Method
     func createVideo(tag: String, duration: String, fileName: String) {
         let video = RecordedVideoItem(context: databaseContext)
         video.tag = tag
@@ -40,7 +40,7 @@ class CoreDataService {
         saveToDatabase()
     }
     
-    //MARK: - Get Videos Method
+    // MARK: - Get Videos Method
     func loadVideosFromDatabase() {
         let request: NSFetchRequest<RecordedVideoItem> = RecordedVideoItem.fetchRequest()
         do{
@@ -49,7 +49,7 @@ class CoreDataService {
             print("Error loading files from core data = \(error)")
         }
     }
-    //MARK: - Create Update Method
+    // MARK: - Update Video Method
     func updateVideo(newTag: String, atIndex index: Int) {
         let video = savedVideos[index]
         video.tag = newTag
@@ -57,7 +57,7 @@ class CoreDataService {
         delegate?.videosHaveLoaded(self, loadedVideos: savedVideos)
     }
     
-    //MARK: - Delete Video Method
+    // MARK: - Delete Video Method
     func deleteVideo(atIndex index: Int) {
         databaseContext.delete(savedVideos[index])
         saveToDatabase()
