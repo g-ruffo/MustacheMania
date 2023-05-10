@@ -171,6 +171,7 @@ extension VideoListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - CoreDataServiceDelegate
 extension VideoListViewController: CoreDataServiceDelegate {
     func videosHaveLoaded(_ coreDataService: CoreDataService, loadedVideos: [RecordedVideoItem]) {
         savedVideos = loadedVideos
