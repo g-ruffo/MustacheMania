@@ -15,18 +15,16 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         delegate = self
-        
         setupTabBarItems()
     }
 
     func setupTabBarItems() {
-        // Initiate view controllers
+        // Initiate view controllers.
         let videoListNav = self.storyboard?.instantiateViewController(withIdentifier: K.Navigation.videoListNav) as! UINavigationController
         let recordVideoNav = self.storyboard?.instantiateViewController(withIdentifier: K.Navigation.recordVideoNav) as! UINavigationController
         
-        // Create tab bar items
+        // Create tab bar items.
         videoListNav.tabBarItem = UITabBarItem(title: "Videos", image: UIImage(systemName: "list.bullet.rectangle"), selectedImage: UIImage(systemName: "list.bullet.rectangle.fill")?.withTintColor(.red))
         recordVideoNav.tabBarItem = UITabBarItem(title: "Record", image: UIImage(systemName: "video"), selectedImage: UIImage(systemName: "video.fill"))
 
@@ -43,9 +41,10 @@ class TabBarController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // Set the tab bars height.
         tabBar.frame.size.height = tabBarHeight
         tabBar.frame.origin.y = view.frame.height - tabBarHeight
-        // Set corner radius of tab bar.
+        // Set corner radius of the tab bar.
         tabBar.layer.cornerRadius = tabBarCornerRadius
         tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
@@ -53,8 +52,7 @@ class TabBarController: UITabBarController {
     
     private func animate(_ imageView: UIView) {
           UIView.animate(withDuration: 0.1, animations: {
-              imageView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
-          }) { _ in
+              imageView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25) }) { _ in
               UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 3.0, options: .curveEaseInOut, animations: {
                   // Reset icon position.
                   imageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
