@@ -4,7 +4,7 @@ Utilizing Swift, MustacheMania leverages Apple's ARKit to enable users to seamle
 
 ## Screenshots
 
-![](https://github.com/g-ruffo/MustacheMania/Screenshots/screenshot.gif)
+![](https://github.com/g-ruffo/MustacheMania/blob/main/Screenshots/screenshot.gif)
 
 ## Features
 - [x] Record and save videos to local storage
